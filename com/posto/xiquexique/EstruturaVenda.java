@@ -3,9 +3,14 @@ package com.posto.xiquexique;
 public class EstruturaVenda{
         private String item;
         private float preco;
-        private short quantidadeVendida;
+        private int quantidadeVendida;
         private float precoUnit;
         
+        public EstruturaVenda(String item,float precoUnit, int quantidadeVendida){
+            this.item=item;
+            this.precoUnit=precoUnit;
+            this.quantidadeVendida=quantidadeVendida;
+        }
         
         public String getItem(){
             return this.item;
@@ -33,7 +38,7 @@ public class EstruturaVenda{
 
 
 
-        public short getQuantidadeVendida() {
+        public int getQuantidadeVendida() {
             return quantidadeVendida;
         }
 
@@ -43,7 +48,7 @@ public class EstruturaVenda{
             this.quantidadeVendida = quantidadeVendida;
         }
 
-
+        
 
         public float getPrecoUnit() {
             return precoUnit;
