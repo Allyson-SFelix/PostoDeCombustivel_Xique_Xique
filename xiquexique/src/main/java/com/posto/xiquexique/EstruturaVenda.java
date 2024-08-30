@@ -2,10 +2,14 @@ package com.posto.xiquexique;
 
 public class EstruturaVenda{
         private String item;
-        private float preco;
-        private short quantidadeVendida;
+        private int quantidadeVendida;
         private float precoUnit;
         
+        public EstruturaVenda(String item,float precoUnit, int quantidadeVendida){
+            this.item=item;
+            this.precoUnit=precoUnit;
+            this.quantidadeVendida=quantidadeVendida;
+        }
         
         public String getItem(){
             return this.item;
@@ -17,8 +21,9 @@ public class EstruturaVenda{
             this.item = item;
         }
 
-        public float getPreco(){
-            return this.preco;
+        @Override
+        public String toString(){
+            return "Item: "+item+" Preço Unitário: "+precoUnit+" Quantidade Vendida: "+quantidadeVendida+" Valor Total: "+valorTotal();
         }
         
         private float valorTotal(){
@@ -27,13 +32,8 @@ public class EstruturaVenda{
 
 
 
-        public void setPreco(float preco) {
-            this.preco = preco;
-        }
 
-
-
-        public short getQuantidadeVendida() {
+        public int getQuantidadeVendida() {
             return quantidadeVendida;
         }
 
@@ -43,7 +43,7 @@ public class EstruturaVenda{
             this.quantidadeVendida = quantidadeVendida;
         }
 
-
+        
 
         public float getPrecoUnit() {
             return precoUnit;
