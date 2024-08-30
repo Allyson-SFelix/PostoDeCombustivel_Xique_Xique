@@ -9,8 +9,16 @@ package com.posto.xiquexique;
  * @author aliran
  */
 public class Xiquexique {
+    private static HashEstoque estoque;
+
+    public Xiquexique() {
+        estoque = new HashEstoque();
+    }
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        VendasMenuFrame vendasMenu = new VendasMenuFrame(estoque);
+        vendasMenu.setVisible(true);
+
     }
+    
 }
