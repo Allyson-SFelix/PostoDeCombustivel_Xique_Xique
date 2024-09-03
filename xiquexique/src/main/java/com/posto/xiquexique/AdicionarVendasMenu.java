@@ -53,8 +53,10 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
         jComboBox1.setToolTipText("Itens em estoque");
         jComboBox1.setMinimumSize(new java.awt.Dimension(90, 30));
         jComboBox1.setPreferredSize(new java.awt.Dimension(90, 30));
-        jComboBox1.addActionListener((java.awt.event.ActionEvent evt) -> {
-            jComboBox1ActionPerformed(evt);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
         });
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -78,25 +80,27 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
                 false, false, false, false
             };
 
-            @Override
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jTable1.setDropMode(javax.swing.DropMode.INSERT_ROWS);
         jTable1.setPreferredSize(new java.awt.Dimension(200, 80));
+        jTable1.setShowGrid(false);
+        jTable1.setShowHorizontalLines(true);
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Adicionar");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setPreferredSize(new java.awt.Dimension(90, 30));
-        jButton1.addActionListener((java.awt.event.ActionEvent evt) -> {
-            jButton1ActionPerformed(evt);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
         });
 
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel((byte)0, (byte)0, null, (byte)1));
@@ -109,8 +113,10 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
         btnSair.setText("Sair");
         btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSair.setPreferredSize(new java.awt.Dimension(90, 24));
-        btnSair.addActionListener((java.awt.event.ActionEvent evt) -> {
-            btnSairActionPerformed(evt);
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
         });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,22 +124,20 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,13 +162,13 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
-    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {                                        
         this.dispose();
 
     }
-//GEN-LAST:event_jComboBox1ActionPerformed
+                                          
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         int quant = (int) jSpinner1.getValue();
         String item = jComboBox1.getSelectedItem().toString();
         int hash = hashEstoque.codigoHashGen(item);
@@ -182,8 +186,8 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(new Object[]{estruturaVendas.getItem(), estruturaVendas.getPrecoUnit(), estruturaVendas.getQuantidadeVendida(), estruturaVendas.getPrecoUnit()*estruturaVendas.getQuantidadeVendida()});
     }
-    //GEN-LAST:event_btnSairActionPerformed
-    //GEN-LAST:event_jButton1ActionPerformed
+                                           
+                                            
 
     /**
      * @param args the command line arguments

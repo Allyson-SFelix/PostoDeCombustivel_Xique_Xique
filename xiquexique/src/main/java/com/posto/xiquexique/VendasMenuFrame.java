@@ -46,8 +46,10 @@ public class VendasMenuFrame extends javax.swing.JFrame {
 
         Add.setText("Adicionar Venda");
         Add.setPreferredSize(new java.awt.Dimension(140, 30));
-        Add.addActionListener((java.awt.event.ActionEvent evt) -> {
-            AddActionPerformed(evt);
+        Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddActionPerformed(evt);
+            }
         });
 
         jLabel1.setText("Vendas");
@@ -59,10 +61,10 @@ public class VendasMenuFrame extends javax.swing.JFrame {
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Coca-Cola",  (byte) 1,  5.0f,  50.0f},
-                {"Pepsi",  (byte)10,  4.5f,  45.0f},
-                {"Soda",  (byte) 10,  4.0f,  40.0f},
-                {"Guarana",  (byte) 10,  4.75f,  47.5f},
+                {"Coca-Cola",  new Byte((byte) 10),  new Float(5.0),  new Float(50.0)},
+                {"Pepsi",  new Byte((byte) 10),  new Float(4.5),  new Float(45.0)},
+                {"Soda",  new Byte((byte) 10),  new Float(4.0),  new Float(40.0)},
+                {"Guarana",  new Byte((byte) 10),  new Float(4.75),  new Float(47.5)},
                 {null, null, null, null}
             },
             new String [] {
@@ -76,12 +78,10 @@ public class VendasMenuFrame extends javax.swing.JFrame {
                 false, false, false, false
             };
 
-            @Override
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
-            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
@@ -89,7 +89,6 @@ public class VendasMenuFrame extends javax.swing.JFrame {
         jTable1.setDropMode(javax.swing.DropMode.INSERT_ROWS);
         jTable1.setPreferredSize(new java.awt.Dimension(200, 80));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
@@ -105,27 +104,31 @@ public class VendasMenuFrame extends javax.swing.JFrame {
         campoTexto.setFocusable(false);
 
         Venda.setText("Acessar");
-        Venda.setPreferredSize(new java.awt.Dimension(230, 30));
-        Venda.addActionListener((java.awt.event.ActionEvent evt) -> {
-            VendaActionPerformed(evt);
+        Venda.setPreferredSize(new java.awt.Dimension(195, 30));
+        Venda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VendaActionPerformed(evt);
+            }
         });
 
         btnExit.setText("Sair");
-        btnExit.setPreferredSize(new java.awt.Dimension(230, 30));
-        btnExit.addActionListener((java.awt.event.ActionEvent evt) -> {
-            btnExitActionPerformed(evt);
+        btnExit.setPreferredSize(new java.awt.Dimension(195, 30));
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
         });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
                 .addComponent(Venda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,24 +144,18 @@ public class VendasMenuFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                        .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane1)
-                            .addComponent(campoTexto))))
-                .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(212, 212, 212)
+                        .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane1)
+                    .addComponent(campoTexto)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
