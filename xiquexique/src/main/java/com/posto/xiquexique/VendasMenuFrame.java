@@ -46,10 +46,8 @@ public class VendasMenuFrame extends javax.swing.JFrame {
 
         Add.setText("Adicionar Venda");
         Add.setPreferredSize(new java.awt.Dimension(140, 30));
-        Add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddActionPerformed(evt);
-            }
+        Add.addActionListener((java.awt.event.ActionEvent evt) -> {
+            AddActionPerformed(evt);
         });
 
         jLabel1.setText("Vendas");
@@ -61,8 +59,8 @@ public class VendasMenuFrame extends javax.swing.JFrame {
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Coca-Cola",  (byte) 10,  5.0f,  50.0},
-                {"Pepsi",  (byte) 10,  4.5f,  45.0f},
+                {"Coca-Cola",  (byte) 1,  5.0f,  50.0f},
+                {"Pepsi",  (byte)10,  4.5f,  45.0f},
                 {"Soda",  (byte) 10,  4.0f,  40.0f},
                 {"Guarana",  (byte) 10,  4.75f,  47.5f},
                 {null, null, null, null}
@@ -78,10 +76,12 @@ public class VendasMenuFrame extends javax.swing.JFrame {
                 false, false, false, false
             };
 
+            @Override
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
 
+            @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
@@ -89,6 +89,7 @@ public class VendasMenuFrame extends javax.swing.JFrame {
         jTable1.setDropMode(javax.swing.DropMode.INSERT_ROWS);
         jTable1.setPreferredSize(new java.awt.Dimension(200, 80));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
@@ -105,18 +106,14 @@ public class VendasMenuFrame extends javax.swing.JFrame {
 
         Venda.setText("Acessar");
         Venda.setPreferredSize(new java.awt.Dimension(230, 30));
-        Venda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VendaActionPerformed(evt);
-            }
+        Venda.addActionListener((java.awt.event.ActionEvent evt) -> {
+            VendaActionPerformed(evt);
         });
 
         btnExit.setText("Sair");
         btnExit.setPreferredSize(new java.awt.Dimension(230, 30));
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
-            }
+        btnExit.addActionListener((java.awt.event.ActionEvent evt) -> {
+            btnExitActionPerformed(evt);
         });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
