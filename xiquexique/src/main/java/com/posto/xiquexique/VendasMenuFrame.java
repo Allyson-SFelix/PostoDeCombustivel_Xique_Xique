@@ -68,7 +68,7 @@ public class VendasMenuFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nome", "Quantidade", "Preço Unit.", "Preço Total"
+                "Nome", "Hora", "Data", "Preço Total"
             }
         ) {
             Class[] types = new Class [] {

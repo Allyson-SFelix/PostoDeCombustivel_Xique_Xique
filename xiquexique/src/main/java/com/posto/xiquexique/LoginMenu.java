@@ -43,6 +43,7 @@ public class LoginMenu extends javax.swing.JFrame {
         alertChooseFunction.setTitle("Função");
         alertChooseFunction.setMinimumSize(new java.awt.Dimension(400, 175));
 
+        alertText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         alertText.setText("Escolha sua Função");
         alertText.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         alertText.setPreferredSize(new java.awt.Dimension(140, 30));

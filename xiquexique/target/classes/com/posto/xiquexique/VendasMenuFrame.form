@@ -111,14 +111,14 @@
                   <Data value="Guarana"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="false" title="Quantidade" type="java.lang.Byte">
+                <Column editable="false" title="Hora" type="java.lang.Byte">
                   <Data value="10"/>
                   <Data value="10"/>
                   <Data value="10"/>
                   <Data value="10"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="false" title="Pre&#xe7;o Unit." type="java.lang.Float">
+                <Column editable="false" title="Data" type="java.lang.Float">
                   <Data value="5.0"/>
                   <Data value="4.5"/>
                   <Data value="4.0"/>

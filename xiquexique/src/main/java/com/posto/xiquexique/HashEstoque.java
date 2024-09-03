@@ -11,6 +11,7 @@ package com.posto.xiquexique;
 public final class HashEstoque{
     public int codigoHashGen(String item){
         return item.hashCode();
+        // lembrar de implementar a função hash
 
     };
 
@@ -99,7 +100,7 @@ public final class HashEstoque{
         int hash = codigoHashGen(item)%tamanho;
         if(tabela[hash]!=null){
             if(tabela[hash].getItem().equals(item)){
-                if(tabela[hash].getQuantidade()>=quantidade){
+                if(tabela[hash].getQuantidade()>quantidade){
                     tabela[hash].setQuantidade((int) (tabela[hash].getQuantidade()-quantidade));
                     return 0;
                 } else if (tabela[hash].getQuantidade() == quantidade){
