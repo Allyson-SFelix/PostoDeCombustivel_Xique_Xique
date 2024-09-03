@@ -203,13 +203,13 @@ public class LoginMenu extends javax.swing.JFrame {
         String password = new String(PasswordField.getPassword());
         String user = UserField.getText();
 
+        this.dispose();
         if (user.equals("admin") && password.equals("admin")) {
             System.out.println("Login efetuado com sucesso");
         } else {
             System.out.println("Login ou senha incorretos");
         }
         alertChooseFunction.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenteActionPerformed
