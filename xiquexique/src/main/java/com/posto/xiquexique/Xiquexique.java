@@ -16,6 +16,7 @@ public class Xiquexique {
     }
 
     public static void main(String[] args) {
+        estoque = new HashEstoque();
         VendasMenuFrame vendasMenu = new VendasMenuFrame(estoque);
         vendasMenu.setVisible(true);
 

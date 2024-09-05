@@ -9,9 +9,21 @@ package com.posto.xiquexique;
  * @author aliran
  */
 public final class HashEstoque{
+
+
+    /**
+     * Generates a hash code for the given item using a hash function.
+     * 
+     * @param item the item to generate the hash code for
+     * @return the generated hash code
+     */
     public int codigoHashGen(String item){
-        return item.hashCode();
-        // lembrar de implementar a função hash
+        // TODO lembrar de implementar a função hash
+        int hash = item.hashCode();
+        if(hash<0){
+            hash = hash*-1;
+        }
+        return hash%tamanho;
 
     };
 
@@ -22,11 +34,11 @@ public final class HashEstoque{
         private final String codigo;
 
         
-        public EstruturaEstoque(String item,float precoUnit, int quantidade){
+        public EstruturaEstoque(String item,float precoUnit, int quantidade, String codigo){
             this.item=item;
             this.precoUnit=precoUnit;
             this.quantidade=quantidade;
-            this.codigo = String.valueOf(codigoHashGen(item));
+            this.codigo = codigo;
         }
         
         public String getItem(){
@@ -70,6 +82,10 @@ public final class HashEstoque{
 
     public HashEstoque(){
         tabela = new EstruturaEstoque[tamanho];
+        for(int i = 0; i<tamanho; i++){
+            tabela[i] = null;
+        }
+
         this.inserir("Coca-Cola", 5, 10);
         this.inserir("Pepsi", 4, 10);
         this.inserir("Fanta", 3, 10);
@@ -83,19 +99,35 @@ public final class HashEstoque{
         return this.tabela;
     }
 
+    
+    /**
+     * Inserts an item into the hash table.
+     * 
+     * @param item the item to be inserted
+     * @param precoUnit the unit price of the item
+     * @param quantidade the quantity of the item
+     */
     public void inserir(String item, float precoUnit, int quantidade){
-        int hash = item.hashCode()%tamanho;
+        int hash = codigoHashGen(item)%tamanho;
+
         if(tabela[hash]==null){
-            tabela[hash] = new EstruturaEstoque(item, precoUnit, quantidade);
+            tabela[hash] = new EstruturaEstoque(item, precoUnit, quantidade, hash+"");
         }else{
             int i = 1;
             while(tabela[hash+i]!=null){
                 i++;
             }
-            tabela[hash+i] = new EstruturaEstoque(item, precoUnit, quantidade);
+            tabela[hash+i] = new EstruturaEstoque(item, precoUnit, quantidade, hash+i+"");
         }
     }
 
+    /**
+     * Removes a specified quantity of an item from the inventory.
+     * 
+     * @param item The item to be removed.
+     * @param quantidade The quantity of the item to be removed.
+     * @return 0 if the item was successfully removed, 1 if the item was completely removed from the inventory, -1 if the quantity is insufficient.
+     */
     public byte retirarQuant(String item, int quantidade){
         int hash = codigoHashGen(item)%tamanho;
         if(tabela[hash]!=null){
@@ -117,17 +149,18 @@ public final class HashEstoque{
                 int i = 1;
                 while(tabela[hash+i]!=null){
                     if(tabela[hash+i].getItem().equals(item)){
-                        if(tabela[hash+i].getQuantidade()<quantidade){
-                            System.out.println("Quantidade insuficiente");
-                            return -1;
-
+                        if(tabela[hash+i].getQuantidade()>quantidade){
+                            tabela[hash+i].setQuantidade((int) (tabela[hash+i].getQuantidade()-quantidade));
+                            return 0;
+                            
                         } else if (tabela[hash].getQuantidade() == quantidade){
                             remover(tabela[hash].getItem());
                             return 1;
                             
                         }
-                        tabela[hash+i].setQuantidade((int) (tabela[hash+i].getQuantidade()-quantidade));
-                        return 0;
+                        System.out.println("Quantidade insuficiente");
+                        return -1;
+                        
                     }
                     i++;
                 }
@@ -137,6 +170,11 @@ public final class HashEstoque{
         return -1;
     }
 
+    /**
+     * Removes an item from the hash table.
+     * 
+     * @param item the item to be removed
+     */
     public void remover(String item){
         int hash = codigoHashGen(item)%tamanho;
         if(tabela[hash]!=null){

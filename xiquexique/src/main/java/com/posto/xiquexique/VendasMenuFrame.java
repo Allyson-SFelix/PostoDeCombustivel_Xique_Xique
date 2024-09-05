@@ -4,19 +4,51 @@
  */
 package com.posto.xiquexique;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author aliran
  */
 public class VendasMenuFrame extends javax.swing.JFrame {
 
+
     HashEstoque hashEstoque;
+
     /**
      * Creates new form VendasMenuFrame
      */
     public VendasMenuFrame(HashEstoque estoque) {
         this.hashEstoque = estoque;
         initComponents();
+
+        tableADD(estoque);
+    }
+
+
+    
+    private void tableADD(HashEstoque estoque){
+        ((DefaultTableModel) jTable1.getModel()).removeRow(0);
+
+        HashEstoque.EstruturaEstoque[] estoqueArrayAux = new HashEstoque.EstruturaEstoque[255];
+        HashEstoque.EstruturaEstoque[] aux = estoque.getTabela();
+        int auxIndex = 0;
+        for (HashEstoque.EstruturaEstoque estoqueArray1 : aux) {
+            if (estoqueArray1 != null) {
+                estoqueArrayAux[auxIndex] = estoqueArray1;
+                auxIndex++;
+            }
+        }
+        HashEstoque.EstruturaEstoque[] estoqueArray = estoqueArrayAux;
+
+        
+        for (int i = 0; i < auxIndex; i++) {
+            HashEstoque.EstruturaEstoque estoqueArray1 = estoqueArray[i];
+            if (estoqueArray1 != null) {
+                ((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{estoqueArray1.getItem(), estoqueArray1.getQuantidade(), estoqueArray1.getPrecoUnit(), estoqueArray1.getPrecoUnit() * estoqueArray1.getQuantidade()});
+            }
+        }
+        
     }
 
     /**
@@ -42,7 +74,6 @@ public class VendasMenuFrame extends javax.swing.JFrame {
         setTitle("Vendas");
         setMaximumSize(new java.awt.Dimension(500, 400));
         setMinimumSize(new java.awt.Dimension(500, 400));
-        setPreferredSize(new java.awt.Dimension(500, 400));
 
         Add.setText("Adicionar Venda");
         Add.setPreferredSize(new java.awt.Dimension(140, 30));
@@ -57,37 +88,29 @@ public class VendasMenuFrame extends javax.swing.JFrame {
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setToolTipText("Tabela Vendas");
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Coca-Cola",  new Byte((byte) 10),  new Float(5.0),  new Float(50.0)},
-                {"Pepsi",  new Byte((byte) 10),  new Float(4.5),  new Float(45.0)},
-                {"Soda",  new Byte((byte) 10),  new Float(4.0),  new Float(40.0)},
-                {"Guarana",  new Byte((byte) 10),  new Float(4.75),  new Float(47.5)},
                 {null, null, null, null}
             },
             new String [] {
-                "Nome", "Hora", "Data", "Preço Total"
+                "Nome", "Data", "Hora", "Preço Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Byte.class, java.lang.Float.class, java.lang.Float.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
         });
         jTable1.setDropMode(javax.swing.DropMode.INSERT_ROWS);
+        jTable1.setName(""); // NOI18N
         jTable1.setPreferredSize(new java.awt.Dimension(200, 80));
+        jTable1.setShowGrid(true);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -155,7 +178,7 @@ public class VendasMenuFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addComponent(campoTexto)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +192,7 @@ public class VendasMenuFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -180,7 +203,7 @@ public class VendasMenuFrame extends javax.swing.JFrame {
 
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
         AdicionarVendasMenu add = new AdicionarVendasMenu(hashEstoque);
-        add.main("");
+        add.setVisible(true);
         
     }//GEN-LAST:event_AddActionPerformed
 
@@ -193,7 +216,7 @@ public class VendasMenuFrame extends javax.swing.JFrame {
                 int col = jTable1.columnAtPoint(evt.getPoint());
 
                 if (row >= 0 && col >= 0) {
-                    Object value = jTable1.getValueAt(row, col);
+                    Object value = jTable1.getValueAt(row, 0);
                     campoTexto.setText(value.toString());
                     
                 }
@@ -225,9 +248,8 @@ public class VendasMenuFrame extends javax.swing.JFrame {
         //</editor-fold>
         
         //</editor-fold>
-
-        /* Create and display the form */
         HashEstoque estoque = new HashEstoque();
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new VendasMenuFrame(estoque).setVisible(true);
         });

@@ -10,6 +10,8 @@ package com.posto.xiquexique;
  * @author Aluno
  */
 public class VisualizarVendas extends javax.swing.JFrame {
+
+    EstruturaVenda venda;
  
     /**
      * Creates new form visualizarVendas

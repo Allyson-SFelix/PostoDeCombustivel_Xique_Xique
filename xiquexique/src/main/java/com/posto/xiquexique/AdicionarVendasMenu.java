@@ -21,6 +21,29 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
     public AdicionarVendasMenu(HashEstoque estoque) {
         this.hashEstoque = estoque;
         initComponents();
+        comboBoxAdd(estoque);
+    }
+
+    private void comboBoxAdd(HashEstoque estoque){
+        HashEstoque.EstruturaEstoque[] estoqueArrayAux = new HashEstoque.EstruturaEstoque[255];
+        HashEstoque.EstruturaEstoque[] aux = estoque.getTabela();
+        int auxIndex = 0;
+        for (HashEstoque.EstruturaEstoque estoqueArray1 : aux) {
+            if (estoqueArray1 != null) {
+                estoqueArrayAux[auxIndex] = estoqueArray1;
+                auxIndex++;
+            }
+        }
+        HashEstoque.EstruturaEstoque[] estoqueArray = estoqueArrayAux;
+
+        
+        for (int i = 0; i < auxIndex; i++) {
+            HashEstoque.EstruturaEstoque estoqueArray1 = estoqueArray[i];
+            if (estoqueArray1 != null) {
+                jComboBox1.addItem(estoqueArray1.getItem());
+            }
+        }
+        
     }
     
     
@@ -48,7 +71,6 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(400, 300));
         setName("AdicionarVenda"); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setToolTipText("Itens em estoque");
         jComboBox1.setMinimumSize(new java.awt.Dimension(90, 30));
         jComboBox1.setPreferredSize(new java.awt.Dimension(90, 30));
@@ -63,17 +85,14 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Nome", "Quantidade", "Preço Unit.", "Preço Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Byte.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -102,7 +121,7 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
             }
         });
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel((byte)0, (byte)0, null, (byte)1));
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 255, 1));
         jSpinner1.setToolTipText("Quantidade");
 
         jButton2.setText("Concluido");
@@ -173,17 +192,28 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
         int hash = hashEstoque.codigoHashGen(item);
         byte verif = hashEstoque.retirarQuant(item, quant);
         HashEstoque.EstruturaEstoque using = hashEstoque.getTabela()[hash];
-        if(verif==0){
+        if(verif==1){
             jComboBox1.removeItem(item);
-
         }
         if(verif==-1){
             JOptionPane.showMessageDialog(null, "Quantidade insuficiente ou Item não encontrado");
             return;
         }
         EstruturaVenda estruturaVendas = new EstruturaVenda(item, using.getPrecoUnit(), quant);
+        
+        
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(new Object[]{estruturaVendas.getItem(), estruturaVendas.getPrecoUnit(), estruturaVendas.getQuantidadeVendida(), estruturaVendas.getPrecoUnit()*estruturaVendas.getQuantidadeVendida()});
+
+        for(int i = 0; i < model.getRowCount(); i++){
+            if(model.getValueAt(i, 0).equals(item)){
+                model.setValueAt((int)model.getValueAt(i, 1)+quant, i, 1);
+                model.setValueAt((float)model.getValueAt(i, 2), i, 2);
+                model.setValueAt((int)model.getValueAt(i, 1)*(float)model.getValueAt(i, 2), i, 3);
+                return;
+            }
+        }
+        model.addRow(new Object[]{estruturaVendas.getItem(),estruturaVendas.getQuantidadeVendida(), estruturaVendas.getPrecoUnit() , estruturaVendas.getPrecoUnit()*estruturaVendas.getQuantidadeVendida()});
     }
                                            
                                             
