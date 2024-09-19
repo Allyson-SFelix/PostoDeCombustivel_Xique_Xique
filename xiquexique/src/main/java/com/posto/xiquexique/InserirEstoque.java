@@ -8,12 +8,12 @@ package com.posto.xiquexique;
  *
  * @author aliran
  */
-public class EstoqueMenu extends javax.swing.JFrame {
+public class InserirEstoque extends javax.swing.JFrame {
 
     /**
      * Creates new form EstoqueMenu
      */
-    public EstoqueMenu() {
+    public InserirEstoque() {
         initComponents();
     }
 
@@ -115,7 +115,7 @@ public class EstoqueMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EstoqueMenu().setVisible(true);
+                new InserirEstoque().setVisible(true);
             }
         });
     }
