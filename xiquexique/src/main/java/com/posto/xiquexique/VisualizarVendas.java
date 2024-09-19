@@ -16,7 +16,8 @@ public class VisualizarVendas extends javax.swing.JFrame {
     /**
      * Creates new form visualizarVendas
      */
-    public VisualizarVendas() {
+    public VisualizarVendas(EstruturaVenda venda) {
+        this.venda = venda;
         initComponents();
     }
  
@@ -142,7 +143,7 @@ public class VisualizarVendas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VisualizarVendas().setVisible(true);
+                new VisualizarVendas(null).setVisible(true);
             }
         });
     }

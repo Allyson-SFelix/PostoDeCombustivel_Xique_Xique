@@ -13,7 +13,11 @@ public class EstoqueMenu extends javax.swing.JFrame {
     /**
      * Creates new form EstoqueMenu
      */
-    public EstoqueMenu() {
+    
+    HashEstoque hashEstoque;
+            
+    public EstoqueMenu(HashEstoque estoque) {
+        this.hashEstoque = estoque;
         initComponents();
     }
 
@@ -55,6 +59,11 @@ public class EstoqueMenu extends javax.swing.JFrame {
         botaoInserir.setMaximumSize(new java.awt.Dimension(100, 30));
         botaoInserir.setMinimumSize(new java.awt.Dimension(100, 30));
         botaoInserir.setPreferredSize(new java.awt.Dimension(100, 30));
+        botaoInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoInserirActionPerformed(evt);
+            }
+        });
 
         botaoEditar.setText("Editar");
         botaoEditar.setMaximumSize(new java.awt.Dimension(100, 30));
@@ -113,7 +122,7 @@ public class EstoqueMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
@@ -123,6 +132,11 @@ public class EstoqueMenu extends javax.swing.JFrame {
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoRemoverActionPerformed
+
+    private void botaoInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInserirActionPerformed
+        InserirEstoque inserir = new InserirEstoque(hashEstoque);
+        inserir.setVisible(true);
+    }//GEN-LAST:event_botaoInserirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,7 +168,7 @@ public class EstoqueMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EstoqueMenu().setVisible(true);
+                new EstoqueMenu(null).setVisible(true);
             }
         });
     }

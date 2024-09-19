@@ -17,14 +17,17 @@ public final class HashEstoque{
      * @param item the item to generate the hash code for
      * @return the generated hash code
      */
-    public int codigoHashGen(String item){
-        // TODO lembrar de implementar a função hash
-        int hash = item.hashCode();
-        if(hash<0){
-            hash = hash*-1;
+    
+    private int stringToInt(String item){
+        int hash = 0;
+        for(int i = 0 ; i < item.length() ; i++){
+            hash += item.charAt(i);
         }
-        return hash%tamanho;
-
+        return hash*hash;
+    }
+    
+    public int codigoHashGen(String item){
+        return stringToInt(item)%tamanho;
     };
 
     public class EstruturaEstoque{
@@ -78,7 +81,11 @@ public final class HashEstoque{
     }
 
     private final EstruturaEstoque[] tabela;
-    private final int tamanho = 255;
+    private final int tamanho = 257;
+
+    public int getTamanho(){
+        return this.tamanho;
+    }
 
     public HashEstoque(){
         tabela = new EstruturaEstoque[tamanho];
@@ -108,7 +115,7 @@ public final class HashEstoque{
      * @param quantidade the quantity of the item
      */
     public void inserir(String item, float precoUnit, int quantidade){
-        int hash = codigoHashGen(item)%tamanho;
+        int hash = codigoHashGen(item);
 
         if(tabela[hash]==null){
             tabela[hash] = new EstruturaEstoque(item, precoUnit, quantidade, hash+"");
@@ -129,7 +136,7 @@ public final class HashEstoque{
      * @return 0 if the item was successfully removed, 1 if the item was completely removed from the inventory, -1 if the quantity is insufficient.
      */
     public byte retirarQuant(String item, int quantidade){
-        int hash = codigoHashGen(item)%tamanho;
+        int hash = codigoHashGen(item);
         if(tabela[hash]!=null){
             if(tabela[hash].getItem().equals(item)){
                 if(tabela[hash].getQuantidade()>quantidade){

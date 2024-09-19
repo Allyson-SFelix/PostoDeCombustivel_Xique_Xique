@@ -30,7 +30,7 @@ public class VendasMenuFrame extends javax.swing.JFrame {
     private void tableADD(HashEstoque estoque){
         ((DefaultTableModel) jTable1.getModel()).removeRow(0);
 
-        HashEstoque.EstruturaEstoque[] estoqueArrayAux = new HashEstoque.EstruturaEstoque[255];
+        HashEstoque.EstruturaEstoque[] estoqueArrayAux = new HashEstoque.EstruturaEstoque[this.hashEstoque.getTamanho()];
         HashEstoque.EstruturaEstoque[] aux = estoque.getTabela();
         int auxIndex = 0;
         for (HashEstoque.EstruturaEstoque estoqueArray1 : aux) {
@@ -208,7 +208,8 @@ public class VendasMenuFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_AddActionPerformed
 
     private void VendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendaActionPerformed
-        // TODO add your handling code here:
+        VisualizarVendas vizu = new VisualizarVendas(new EstruturaVenda(null,0f,0));
+        vizu.setVisible(true);
     }//GEN-LAST:event_VendaActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
