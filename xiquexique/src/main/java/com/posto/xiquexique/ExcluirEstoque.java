@@ -20,30 +20,34 @@ public class ExcluirEstoque extends javax.swing.JFrame {
     public ExcluirEstoque(HashEstoque estoque) {
         this.hashEstoque = estoque;
         initComponents();
-        tableADD(estoque);
+        tableAdd(estoque);
     }
 
-    private void tableADD(HashEstoque estoque) {
-        ((DefaultTableModel) tabelaEstoque.getModel()).removeRow(0);
+    private void tableAdd(HashEstoque estoque) {
+        tableClear();
 
         HashEstoque.EstruturaEstoque[] estoqueArrayAux = new HashEstoque.EstruturaEstoque[this.hashEstoque.getTamanho()];
         HashEstoque.EstruturaEstoque[] aux = estoque.getTabela();
         int auxIndex = 0;
-        for (HashEstoque.EstruturaEstoque estoqueArray1 : aux) {
-            if (estoqueArray1 != null) {
-                estoqueArrayAux[auxIndex] = estoqueArray1;
+        for (HashEstoque.EstruturaEstoque estoqueItem : aux) {
+            if (estoqueItem != null) {
+                estoqueArrayAux[auxIndex] = estoqueItem;
                 auxIndex++;
             }
         }
         HashEstoque.EstruturaEstoque[] estoqueArray = estoqueArrayAux;
 
         for (int i = 0; i < auxIndex; i++) {
-            HashEstoque.EstruturaEstoque estoqueArray1 = estoqueArray[i];
-            if (estoqueArray1 != null) {
-                ((DefaultTableModel) tabelaEstoque.getModel()).addRow(new Object[]{estoqueArray1.getItem(), estoqueArray1.getQuantidade(), estoqueArray1.getPrecoUnit()});
+            HashEstoque.EstruturaEstoque estoqueItem = estoqueArray[i];
+            if (estoqueItem != null) {
+                ((DefaultTableModel) tabelaEstoque.getModel()).addRow(new Object[]{estoqueItem.getItem(), estoqueItem.getQuantidade(), estoqueItem.getPrecoUnit()});
             }
         }
+    }
 
+    private void tableClear() {
+        DefaultTableModel model = (DefaultTableModel) tabelaEstoque.getModel();
+        model.setRowCount(0);
     }
 
     /**
@@ -92,8 +96,10 @@ public class ExcluirEstoque extends javax.swing.JFrame {
             }
         });
         tabelaEstoque.setDropMode(javax.swing.DropMode.INSERT_ROWS);
+        tabelaEstoque.setMaximumSize(jScrollPane2.getSize());
+        tabelaEstoque.setMinimumSize(jScrollPane2.getSize());
         tabelaEstoque.setName(""); // NOI18N
-        tabelaEstoque.setPreferredSize(new java.awt.Dimension(200, 80));
+        tabelaEstoque.setPreferredSize(getSize());
         tabelaEstoque.setShowGrid(true);
         tabelaEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -105,7 +111,6 @@ public class ExcluirEstoque extends javax.swing.JFrame {
         jLabel4.setText("Opção Selecionada: ");
 
         campoTexto.setColumns(4);
-        campoTexto.setText("Nenhuma");
         campoTexto.setToolTipText("Selecionada");
         campoTexto.setActionCommand("<Not Set>");
         campoTexto.setFocusable(false);
@@ -132,6 +137,11 @@ public class ExcluirEstoque extends javax.swing.JFrame {
         btnRemover.setMaximumSize(new java.awt.Dimension(100, 30));
         btnRemover.setMinimumSize(new java.awt.Dimension(100, 30));
         btnRemover.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -187,6 +197,19 @@ public class ExcluirEstoque extends javax.swing.JFrame {
     private void campoTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTextoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoTextoActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        String item = campoTexto.getText();
+        if (item.equals("")) {
+            return;
+        }
+        this.hashEstoque.remover(item);
+
+        tableAdd(this.hashEstoque);
+
+        campoTexto.setText("");
+
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,7 +4,6 @@
  */
 package com.posto.xiquexique;
 
-import java.awt.Color;
 
 /**
  *
@@ -155,19 +154,19 @@ public class InserirEstoque extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quantSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(15, 15, 15)
                 .addComponent(campoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
                 .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(15, 15, 15)
                 .addComponent(campoAux, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
                 .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -198,7 +197,7 @@ public class InserirEstoque extends javax.swing.JFrame {
     private void campoNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusGained
         if(campoNome.getText().equals("Nome")){
             campoNome.setText("");
-            campoNome.setForeground(new Color(187,187,187));
+            
         }
         
     }//GEN-LAST:event_campoNomeFocusGained
@@ -206,21 +205,20 @@ public class InserirEstoque extends javax.swing.JFrame {
     private void campoNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusLost
         if(campoNome.getText().equals("")){
             campoNome.setText("Nome");
-            campoNome.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_campoNomeFocusLost
 
     private void campoPrecoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoPrecoFocusGained
         if(campoPreco.getText().equals("Preço")){
             campoPreco.setText("");
-            campoPreco.setForeground(new Color(187,187,187));
+            
         }
     }//GEN-LAST:event_campoPrecoFocusGained
     
     private void campoPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoPrecoFocusLost
         if(campoPreco.getText().equals("")){
             campoPreco.setText("Preço");
-            campoPreco.setForeground(new Color(153,153,153));
+            
             
         }
     }//GEN-LAST:event_campoPrecoFocusLost

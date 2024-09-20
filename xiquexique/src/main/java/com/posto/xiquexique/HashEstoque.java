@@ -5,19 +5,26 @@
 package com.posto.xiquexique;
 
 /**
- *
+ * Classe que implementa uma tabela hash para o estoque
+ * Primeira Classe implementada no sistema
+ * Funções:
+ * - Inserir um item na tabela
+ * - Buscar um item na tabela
+ * - Retirar uma quantidade de um item da tabela
+ * - Remover um item da tabela
+ * - Gerar um código hash
+ * - Classe interna EstruturaEstoque que representa um item do estoque
+ * 
  * @author aliran
  */
 public final class HashEstoque{
 
-
     /**
-     * Generates a hash code for the given item using a hash function.
+     * Converte uma string em um inteiro
      * 
-     * @param item the item to generate the hash code for
-     * @return the generated hash code
-     */
-    
+     * @param item a string a ser convertida
+     * @return o inteiro gerado ao quadrado
+     */   
     private int stringToInt(String item){
         int hash = 0;
         for(int i = 0 ; i < item.length() ; i++){
@@ -26,6 +33,12 @@ public final class HashEstoque{
         return hash*hash;
     }
     
+    /**
+     * Gerador de código hash
+     * 
+     * @param item o item a ser gerado o código hash
+     * @return o código hash gerado
+     */
     public int codigoHashGen(String item){
         return stringToInt(item)%tamanho;
     };
@@ -108,11 +121,11 @@ public final class HashEstoque{
 
     
     /**
-     * Inserts an item into the hash table.
+     * Insere um item na tabela
      * 
-     * @param item the item to be inserted
-     * @param precoUnit the unit price of the item
-     * @param quantidade the quantity of the item
+     * @param item o item a ser inserido
+     * @param precoUnit o preço unitário do item
+     * @param quantidade a quantidade do item
      */
     public void inserir(String item, float precoUnit, int quantidade){
         int hash = codigoHashGen(item);
@@ -128,75 +141,65 @@ public final class HashEstoque{
         }
     }
 
+
     /**
-     * Removes a specified quantity of an item from the inventory.
+     * Busca um item na tabela
      * 
-     * @param item The item to be removed.
-     * @param quantidade The quantity of the item to be removed.
-     * @return 0 if the item was successfully removed, 1 if the item was completely removed from the inventory, -1 if the quantity is insufficient.
+     * 
+     * @param item o item a ser buscado
+     * @return o hash do item
      */
-    public byte retirarQuant(String item, int quantidade){
+    private int buscar(String item){
         int hash = codigoHashGen(item);
         if(tabela[hash]!=null){
             if(tabela[hash].getItem().equals(item)){
-                if(tabela[hash].getQuantidade()>quantidade){
-                    tabela[hash].setQuantidade((int) (tabela[hash].getQuantidade()-quantidade));
-                    return 0;
-                } else if (tabela[hash].getQuantidade() == quantidade){
-                    remover(tabela[hash].getItem());
-                    return 1;
-                }
-                
-                else{
-                    System.out.println("Quantidade insuficiente");
-                    return -1;
-                }
-                
+                return hash;
             }else{
                 int i = 1;
                 while(tabela[hash+i]!=null){
                     if(tabela[hash+i].getItem().equals(item)){
-                        if(tabela[hash+i].getQuantidade()>quantidade){
-                            tabela[hash+i].setQuantidade((int) (tabela[hash+i].getQuantidade()-quantidade));
-                            return 0;
-                            
-                        } else if (tabela[hash].getQuantidade() == quantidade){
-                            remover(tabela[hash].getItem());
-                            return 1;
-                            
-                        }
-                        System.out.println("Quantidade insuficiente");
-                        return -1;
-                        
+                        return hash+i;
                     }
                     i++;
                 }
             }
-            
         }
         return -1;
     }
 
     /**
-     * Removes an item from the hash table.
+     * Retira uma quantidade de um item da tabela
      * 
-     * @param item the item to be removed
+     * @param item o item a ser retirado
+     * @param quantidade a quantidade a ser retirada
+     * 
+     * @return 0 se a quantidade foi retirada com sucesso, 1 se o item foi removido e -1 se a quantidade é insuficiente
+     */
+    public byte retirarQuant(String item, int quantidade){
+        int hash = buscar(item);
+        if(tabela[hash]!=null && hash!=-1){
+            if(tabela[hash].getQuantidade()>=quantidade){
+                tabela[hash].setQuantidade(tabela[hash].getQuantidade()-quantidade);
+                if(tabela[hash].getQuantidade()==0){
+                    remover(item);
+                    return 1;
+                }
+                return 0;
+            }
+            System.out.println("Quantidade insuficiente");
+        }
+        return -1;
+    }
+
+    /**
+     * Remove um item da tabela
+     * 
+     * @param item o item a ser removido
      */
     public void remover(String item){
-        int hash = codigoHashGen(item)%tamanho;
-        if(tabela[hash]!=null){
-            if(tabela[hash].getItem().equals(item)){
-                tabela[hash] = null;
-            }else{
-                int i = 1;
-                while(tabela[hash+i]!=null){
-                    if(tabela[hash+i].getItem().equals(item)){
-                        tabela[hash+i] = null;
-                        break;
-                    }
-                    i++;
-                }
-            }
+        int hash = buscar(item);
+        if(hash!=-1){
+            tabela[hash] = null;
         }
     }
     
