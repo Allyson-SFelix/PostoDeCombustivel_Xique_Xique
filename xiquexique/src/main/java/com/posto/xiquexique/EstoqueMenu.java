@@ -32,9 +32,10 @@ public class EstoqueMenu extends javax.swing.JFrame {
 
         btnSair = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        botaoInserir = new javax.swing.JButton();
+        botaoListar = new javax.swing.JButton();
         botaoEditar = new javax.swing.JButton();
         botaoRemover = new javax.swing.JButton();
+        botaoInserir1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Estoque");
@@ -55,13 +56,13 @@ public class EstoqueMenu extends javax.swing.JFrame {
 
         jLabel1.setText("Estoque");
 
-        botaoInserir.setText("Inserir");
-        botaoInserir.setMaximumSize(new java.awt.Dimension(100, 30));
-        botaoInserir.setMinimumSize(new java.awt.Dimension(100, 30));
-        botaoInserir.setPreferredSize(new java.awt.Dimension(100, 30));
-        botaoInserir.addActionListener(new java.awt.event.ActionListener() {
+        botaoListar.setText("Listar");
+        botaoListar.setMaximumSize(new java.awt.Dimension(100, 30));
+        botaoListar.setMinimumSize(new java.awt.Dimension(100, 30));
+        botaoListar.setPreferredSize(new java.awt.Dimension(100, 30));
+        botaoListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoInserirActionPerformed(evt);
+                botaoListarActionPerformed(evt);
             }
         });
 
@@ -85,6 +86,16 @@ public class EstoqueMenu extends javax.swing.JFrame {
             }
         });
 
+        botaoInserir1.setText("Inserir");
+        botaoInserir1.setMaximumSize(new java.awt.Dimension(100, 30));
+        botaoInserir1.setMinimumSize(new java.awt.Dimension(100, 30));
+        botaoInserir1.setPreferredSize(new java.awt.Dimension(100, 30));
+        botaoInserir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoInserir1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,11 +103,12 @@ public class EstoqueMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(200, 200, 200)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(botaoInserir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(100, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(botaoInserir1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(200, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,13 +119,15 @@ public class EstoqueMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(botaoInserir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(botaoInserir1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(botaoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(botaoRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -130,13 +144,19 @@ public class EstoqueMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
-        // TODO add your handling code here:
+        ExcluirEstoque excluir = new ExcluirEstoque(this.hashEstoque);
+        excluir.setVisible(true);
     }//GEN-LAST:event_botaoRemoverActionPerformed
 
-    private void botaoInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInserirActionPerformed
+    private void botaoListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoListarActionPerformed
+        ListarEstoque listar = new ListarEstoque(this.hashEstoque);
+        listar.setVisible(true);
+    }//GEN-LAST:event_botaoListarActionPerformed
+
+    private void botaoInserir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInserir1ActionPerformed
         InserirEstoque inserir = new InserirEstoque(hashEstoque);
         inserir.setVisible(true);
-    }//GEN-LAST:event_botaoInserirActionPerformed
+    }//GEN-LAST:event_botaoInserir1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,7 +195,8 @@ public class EstoqueMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoEditar;
-    private javax.swing.JButton botaoInserir;
+    private javax.swing.JButton botaoInserir1;
+    private javax.swing.JButton botaoListar;
     private javax.swing.JButton botaoRemover;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;

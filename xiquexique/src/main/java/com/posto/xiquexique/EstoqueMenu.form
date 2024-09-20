@@ -40,12 +40,13 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="botaoInserir" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="botaoListar" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="botaoEditar" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="botaoRemover" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="botaoInserir1" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="100" max="32767" attributes="0"/>
+              <EmptySpace pref="200" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -59,13 +60,15 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="botaoInserir" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="botaoListar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <Component id="botaoInserir1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Component id="botaoEditar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Component id="botaoRemover" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="64" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="btnSair" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -92,9 +95,9 @@
         <Property name="text" type="java.lang.String" value="Estoque"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="botaoInserir">
+    <Component class="javax.swing.JButton" name="botaoListar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Inserir"/>
+        <Property name="text" type="java.lang.String" value="Listar"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[100, 30]"/>
         </Property>
@@ -106,7 +109,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoInserirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoListarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botaoEditar">
@@ -141,6 +144,23 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoRemoverActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="botaoInserir1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Inserir"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[100, 30]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[100, 30]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[100, 30]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoInserir1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
