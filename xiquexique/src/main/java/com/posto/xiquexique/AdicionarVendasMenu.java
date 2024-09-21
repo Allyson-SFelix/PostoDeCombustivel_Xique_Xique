@@ -8,7 +8,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Classe que implementa a interface gráfica de adicionar vendas
+ * Funções:
+ * - Adicionar um item a tabela de vendas
+ * - Recarregar o comboBox1 com os itens do estoque
+ * - Sair do sistema
  * @author aliran
  */
 public class AdicionarVendasMenu extends javax.swing.JFrame {
@@ -21,29 +25,22 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
     public AdicionarVendasMenu(HashEstoque estoque) {
         this.hashEstoque = estoque;
         initComponents();
-        comboBoxAdd(estoque);
+        comboBoxReload(estoque);
     }
 
-    private void comboBoxAdd(HashEstoque estoque){
-        HashEstoque.EstruturaEstoque[] estoqueArrayAux = new HashEstoque.EstruturaEstoque[255];
-        HashEstoque.EstruturaEstoque[] aux = estoque.getTabela();
-        int auxIndex = 0;
-        for (HashEstoque.EstruturaEstoque estoqueArray1 : aux) {
-            if (estoqueArray1 != null) {
-                estoqueArrayAux[auxIndex] = estoqueArray1;
-                auxIndex++;
+    /**
+     * Recarrega o comboBox1 com os itens do estoque
+     * 
+     * @param estoque
+     */
+    private void comboBoxReload(HashEstoque estoque){
+        jComboBox1.removeAllItems();
+        for(int i = 0; i < estoque.getTamanho(); i++){
+            HashEstoque.EstruturaEstoque using = estoque.getTabela()[i];
+            if(using!=null){
+                jComboBox1.addItem(using.getItem());
             }
         }
-        HashEstoque.EstruturaEstoque[] estoqueArray = estoqueArrayAux;
-
-        
-        for (int i = 0; i < auxIndex; i++) {
-            HashEstoque.EstruturaEstoque estoqueArray1 = estoqueArray[i];
-            if (estoqueArray1 != null) {
-                jComboBox1.addItem(estoqueArray1.getItem());
-            }
-        }
-        
     }
     
     
@@ -180,28 +177,29 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    /**
+     * Função de Sair do sistema
+     */
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {                                        
         this.dispose();
 
     }
                                           
-
+    /**
+     * Adiciona um item a tabela de vendas
+     * via jComboBox1 e jSpinner1 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         int quant = (int) jSpinner1.getValue();
         String item = jComboBox1.getSelectedItem().toString();
-        int hash = hashEstoque.codigoHashGen(item);
-        byte verif = hashEstoque.retirarQuant(item, quant);
-        HashEstoque.EstruturaEstoque using = hashEstoque.getTabela()[hash];
-        if(verif==1){
-            jComboBox1.removeItem(item);
-        }
-        if(verif==-1){
+        HashEstoque.EstruturaEstoque using = hashEstoque.buscarItem(item);
+
+        if(hashEstoque.retirarQuant(item, quant) == -1){
             JOptionPane.showMessageDialog(null, "Quantidade insuficiente ou Item não encontrado");
             return;
         }
         EstruturaVenda estruturaVendas = new EstruturaVenda(item, using.getPrecoUnit(), quant);
-        
-        
         
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
@@ -210,10 +208,12 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
                 model.setValueAt((int)model.getValueAt(i, 1)+quant, i, 1);
                 model.setValueAt((float)model.getValueAt(i, 2), i, 2);
                 model.setValueAt((int)model.getValueAt(i, 1)*(float)model.getValueAt(i, 2), i, 3);
+                comboBoxReload(hashEstoque);
                 return;
             }
         }
         model.addRow(new Object[]{estruturaVendas.getItem(),estruturaVendas.getQuantidadeVendida(), estruturaVendas.getPrecoUnit() , estruturaVendas.getPrecoUnit()*estruturaVendas.getQuantidadeVendida()});
+        comboBoxReload(hashEstoque);
     }
                                            
                                             

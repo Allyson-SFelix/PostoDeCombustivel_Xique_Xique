@@ -10,10 +10,13 @@ package com.posto.xiquexique;
  */
 public class LoginMenu extends javax.swing.JFrame {
 
+    HashEstoque hashEstoque;
+
     /**
      * Creates new form LoginMenu
      */
-    public LoginMenu() {
+    public LoginMenu(HashEstoque estoque) {
+        this.hashEstoque = estoque;
         initComponents();
     }
 
@@ -207,20 +210,33 @@ public class LoginMenu extends javax.swing.JFrame {
         this.dispose();
         if (user.equals("admin") && password.equals("admin")) {
             System.out.println("Login efetuado com sucesso");
+            alertChooseFunction.setVisible(true);
         } else {
             System.out.println("Login ou senha incorretos");
         }
-        alertChooseFunction.setVisible(true);
+        
     }//GEN-LAST:event_btnEntrarActionPerformed
 
+    /**
+     * Abre o menu do gerente
+     */
     private void btnGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenteActionPerformed
-        // TODO add your handling code here:
+        alertChooseFunction.dispose();
+
+        MenuGerente menuGerente = new MenuGerente(this.hashEstoque);
+        menuGerente.setVisible(true);
     }//GEN-LAST:event_btnGerenteActionPerformed
 
+    /**
+     * Abre o menu do frentista
+     */
     private void btnFrentistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrentistaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFrentistaActionPerformed
 
+    /**
+     * Abre o menu do atendente
+     */
     private void btnAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtendenteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAtendenteActionPerformed
@@ -250,7 +266,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new LoginMenu().setVisible(true);
+            new LoginMenu(null).setVisible(true);
         });
     }
 

@@ -47,23 +47,21 @@ public final class HashEstoque{
         private String item;
         private int quantidade;
         private float precoUnit;
-        private final String codigo;
+        
 
         
-        public EstruturaEstoque(String item,float precoUnit, int quantidade, String codigo){
+        public EstruturaEstoque(String item,float precoUnit, int quantidade){
             this.item=item;
             this.precoUnit=precoUnit;
             this.quantidade=quantidade;
-            this.codigo = codigo;
+            
         }
         
         public String getItem(){
             return this.item;
         }
 
-        public String getCodigo(){
-            return this.codigo;
-        }
+        
 
         public void setItem(String item){
             this.item = item;
@@ -100,6 +98,10 @@ public final class HashEstoque{
         return this.tamanho;
     }
 
+
+    /**
+     * Construtor da classe
+     */
     public HashEstoque(){
         tabela = new EstruturaEstoque[tamanho];
         for(int i = 0; i<tamanho; i++){
@@ -121,7 +123,7 @@ public final class HashEstoque{
 
     
     /**
-     * Insere um item na tabela
+     * Insere um item na tabela hash
      * 
      * @param item o item a ser inserido
      * @param precoUnit o preço unitário do item
@@ -131,19 +133,23 @@ public final class HashEstoque{
         int hash = codigoHashGen(item);
 
         if(tabela[hash]==null){
-            tabela[hash] = new EstruturaEstoque(item, precoUnit, quantidade, hash+"");
+            tabela[hash] = new EstruturaEstoque(item, precoUnit, quantidade);
         }else{
             int i = 1;
-            while(tabela[hash+i]!=null){
+            while(tabela[hash+i]!=null && hash+i<tamanho){
                 i++;
             }
-            tabela[hash+i] = new EstruturaEstoque(item, precoUnit, quantidade, hash+i+"");
+            if(hash+i<tamanho){
+                tabela[hash+i] = new EstruturaEstoque(item, precoUnit, quantidade);
+                return;
+            }
+            System.out.println("Tabela cheia");
         }
     }
 
 
     /**
-     * Busca um item na tabela
+     * Busca um item na tabela e retorna o hash
      * 
      * 
      * @param item o item a ser buscado

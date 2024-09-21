@@ -201,6 +201,9 @@ public class InserirEstoque extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    /**
+     * Se o campo contem o placeholder, limpa o campo
+     */
     private void campoNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusGained
         if(campoNome.getText().equals("Nome")){
             campoNome.setText("");
@@ -209,12 +212,18 @@ public class InserirEstoque extends javax.swing.JFrame {
         
     }//GEN-LAST:event_campoNomeFocusGained
     
+    /**
+     * Se o campo está vazio, coloca o placeholder
+     */
     private void campoNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusLost
         if(campoNome.getText().equals("")){
             campoNome.setText("Nome");
         }
     }//GEN-LAST:event_campoNomeFocusLost
 
+    /**
+     * Se o campo contem o placeholder, limpa o campo
+     */
     private void campoPrecoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoPrecoFocusGained
         if(campoPreco.getText().equals("Preço")){
             campoPreco.setText("");
@@ -222,6 +231,9 @@ public class InserirEstoque extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_campoPrecoFocusGained
     
+    /**
+     * Se o campo está vazio, coloca o placeholder
+     */
     private void campoPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoPrecoFocusLost
         if(campoPreco.getText().equals("")){
             campoPreco.setText("Preço");
@@ -230,31 +242,41 @@ public class InserirEstoque extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_campoPrecoFocusLost
 
+    /**
+     * Insere um item no estoque
+     * Verifica se os campos estão preenchidos corretamente
+     */
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         
         if(campoNome.getText().equals("Nome") || campoPreco.getText().equals("Preco") || campoPreco.getText().equals("") || campoNome.getText().equals("")){
             campoAux.setText("Preencha os campos corretamente");
             return;
         }
-        
-        String nome = campoNome.getText();
-        float preco = Float.parseFloat(campoPreco.getText());
-        int quantidadeLocal = (int) quantSpinner.getValue();
+        campoPreco.setText(campoPreco.getText().replace(",", ".")); // Substitui a virgula por ponto
+        String nome = campoNome.getText(); // Pega o nome do item
+        float preco = Float.parseFloat(campoPreco.getText()); // Pega o preço do item
+        int quantidadeLocal = (int) quantSpinner.getValue(); // Pega a quantidade do item
 
 
         campoAux.setText("Nome: " + nome + " Preço: " + preco + " Quantidade: " + quantidadeLocal);
+        // Salva no campo auxiliar os dados do item
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void campoAuxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoAuxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoAuxActionPerformed
 
+    /**
+     * Confirma a inserção do item no estoque
+     * Insere o item na tabela hash
+     */
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        
         String nome = campoNome.getText();
         float preco = Float.parseFloat(campoPreco.getText());
         int quantidadeLocal = (int) quantSpinner.getValue();
         if(!campoAux.getText().equals("")){
-            hashEstoque.inserir(nome, preco, quantidadeLocal);
+            this.hashEstoque.inserir(nome, preco, quantidadeLocal);
             this.dispose();
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed

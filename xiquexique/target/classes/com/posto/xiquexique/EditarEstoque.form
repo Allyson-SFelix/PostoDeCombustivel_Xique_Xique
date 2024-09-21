@@ -34,18 +34,13 @@
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
+                  <EmptySpace min="145" pref="145" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="warnLabel" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoDialogo" alignment="2" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="warnLabel" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="campoDialogo" alignment="2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="145" pref="145" max="-2" attributes="0"/>
-                          <Component id="btnConcluir" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnConcluir" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="145" max="32767" attributes="0"/>
               </Group>
@@ -66,7 +61,7 @@
                       <Component id="spinnerQuant" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="campoPreco" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="51" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="warnLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnConcluir" min="-2" max="-2" attributes="0"/>

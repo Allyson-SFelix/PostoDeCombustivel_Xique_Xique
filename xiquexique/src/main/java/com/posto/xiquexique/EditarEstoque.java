@@ -116,15 +116,12 @@ public class EditarEstoque extends javax.swing.JFrame {
                     .addComponent(campoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35))
             .addGroup(jDialogLayout.createSequentialGroup()
+                .addGap(145, 145, 145)
                 .addGroup(jDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialogLayout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addGroup(jDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(warnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoDialogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jDialogLayout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(warnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(campoDialogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialogLayout.setVerticalGroup(
@@ -140,7 +137,7 @@ public class EditarEstoque extends javax.swing.JFrame {
                 .addGroup(jDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(spinnerQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(warnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,10 +257,17 @@ public class EditarEstoque extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Função que fecha o menu de edição do estoque
+     */
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    /**
+     * Função que seleciona um item da tabela para edição
+     * 
+     */    
     private void tabelaEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaEstoqueMouseClicked
         int row = tabelaEstoque.rowAtPoint(evt.getPoint());
         int col = tabelaEstoque.columnAtPoint(evt.getPoint());
@@ -279,6 +283,10 @@ public class EditarEstoque extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoTextoActionPerformed
 
+    /**
+     * Função que abre a edição do item selecionado na tabela
+     * 
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         String item = campoTexto.getText();
         if (item.equals("")) {
@@ -292,24 +300,31 @@ public class EditarEstoque extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    /**
+     * Função que conclui a edição do item selecionado
+     * 
+     */
     private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
-        HashEstoque.EstruturaEstoque estoqueItem = hashEstoque.buscarItem(campoDialogo.getText());
-        estoqueItem.setQuantidade((int) spinnerQuant.getValue());
+        
+        HashEstoque.EstruturaEstoque estoqueItem = hashEstoque.buscarItem(campoDialogo.getText()); 
+        // busca o item na tabela hash
+        estoqueItem.setQuantidade((int) spinnerQuant.getValue()); // pega a quantidade do spinner
+
         try {
-            campoPreco.setText(campoPreco.getText().replace(",", "."));
-            float preco = Float.parseFloat(campoPreco.getText());
-            if(preco <= 0){
+            campoPreco.setText(campoPreco.getText().replace(",", ".")); // troca vírgula por ponto
+            float preco = Float.parseFloat(campoPreco.getText()); // converte o texto do campo para float
+            if(preco <= 0){ // verifica se o preço é válido
                 warnLabel.setText("Preço inválido");
                 return;
             }
             
-            estoqueItem.setPrecoUnit(preco);
+            estoqueItem.setPrecoUnit(preco); // seta o preço
         } catch (NumberFormatException e) {
             warnLabel.setText("Preço inválido");
             return;
         }
-        tableModifier.tableAddEstoque(hashEstoque, tabelaEstoque);
-        jDialog.setVisible(false);
+        tableModifier.tableAddEstoque(hashEstoque, tabelaEstoque); // atualiza a tabela
+        jDialog.setVisible(false); // fecha a janela de edição
     }//GEN-LAST:event_btnConcluirActionPerformed
 
     private void campoPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPrecoActionPerformed

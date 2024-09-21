@@ -7,49 +7,32 @@ package com.posto.xiquexique;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Classe principal do sistema de vendas
+ * Funções:
+ * - Adicionar uma venda
+ * - Visualizar uma venda
+ * - Remover uma venda
+ * 
  * @author aliran
  */
-public class VendasMenuFrame extends javax.swing.JFrame {
+public class VendasMenu extends javax.swing.JFrame {
 
 
     HashEstoque hashEstoque;
+    TableModifier tableModifier = new TableModifier();
 
     /**
-     * Creates new form VendasMenuFrame
+     * Creates new form VendasMenu
      */
-    public VendasMenuFrame(HashEstoque estoque) {
+    public VendasMenu(HashEstoque estoque) {
         this.hashEstoque = estoque;
         initComponents();
 
-        tableADD(estoque);
+        tableModifier.tableAddEstoque(estoque, jTable1);
     }
 
 
-    
-    private void tableADD(HashEstoque estoque){
-        ((DefaultTableModel) jTable1.getModel()).removeRow(0);
 
-        HashEstoque.EstruturaEstoque[] estoqueArrayAux = new HashEstoque.EstruturaEstoque[this.hashEstoque.getTamanho()];
-        HashEstoque.EstruturaEstoque[] aux = estoque.getTabela();
-        int auxIndex = 0;
-        for (HashEstoque.EstruturaEstoque estoqueArray1 : aux) {
-            if (estoqueArray1 != null) {
-                estoqueArrayAux[auxIndex] = estoqueArray1;
-                auxIndex++;
-            }
-        }
-        HashEstoque.EstruturaEstoque[] estoqueArray = estoqueArrayAux;
-
-        
-        for (int i = 0; i < auxIndex; i++) {
-            HashEstoque.EstruturaEstoque estoqueArray1 = estoqueArray[i];
-            if (estoqueArray1 != null) {
-                ((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{estoqueArray1.getItem(), estoqueArray1.getQuantidade(), estoqueArray1.getPrecoUnit(), estoqueArray1.getPrecoUnit() * estoqueArray1.getQuantidade()});
-            }
-        }
-        
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -201,17 +184,30 @@ public class VendasMenuFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Abre o menu de Adicionar Vendas
+     * 
+     */
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
         AdicionarVendasMenu add = new AdicionarVendasMenu(hashEstoque);
         add.setVisible(true);
         
     }//GEN-LAST:event_AddActionPerformed
 
+    /**
+     * Abre o menu de Visualizar Vendas
+     * 
+     */
     private void VendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendaActionPerformed
         VisualizarVendas vizu = new VisualizarVendas(new EstruturaVenda(null,0f,0));
         vizu.setVisible(true);
     }//GEN-LAST:event_VendaActionPerformed
 
+    /**
+     * Seleciona um item da tabela
+     * e exibe o nome do item selecionado
+     * 
+     */
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int row = jTable1.rowAtPoint(evt.getPoint());
                 int col = jTable1.columnAtPoint(evt.getPoint());
@@ -223,6 +219,10 @@ public class VendasMenuFrame extends javax.swing.JFrame {
                 }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    /**
+     * Fecha a janela
+     * 
+     */
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
@@ -244,7 +244,7 @@ public class VendasMenuFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VendasMenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendasMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         
@@ -252,7 +252,7 @@ public class VendasMenuFrame extends javax.swing.JFrame {
         HashEstoque estoque = new HashEstoque();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new VendasMenuFrame(estoque).setVisible(true);
+            new VendasMenu(estoque).setVisible(true);
         });
     }
 
