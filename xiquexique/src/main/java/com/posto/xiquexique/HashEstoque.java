@@ -167,6 +167,21 @@ public final class HashEstoque{
         return -1;
     }
 
+
+    /**
+     * Busca um item na tabela
+     * 
+     * @param item o item a ser buscado
+     * @return a estrutura do item
+     */
+    public EstruturaEstoque buscarItem(String item){
+        int hash = buscar(item);
+        if(hash!=-1){
+            return tabela[hash];
+        }
+        return null;
+    }
+
     /**
      * Retira uma quantidade de um item da tabela
      * 

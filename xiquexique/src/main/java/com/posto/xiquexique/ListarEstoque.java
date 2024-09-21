@@ -4,10 +4,12 @@
  */
 package com.posto.xiquexique;
 
-import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Classe que Lista o estoque em uma tabela em uma interface gráfica
+ * Utilizando biblioteca swing
+ * 
+ * 
  * @author aliran
  */
 public class ListarEstoque extends javax.swing.JFrame {
@@ -16,36 +18,16 @@ public class ListarEstoque extends javax.swing.JFrame {
      * Creates new form EstoqueMenu
      */
     HashEstoque hashEstoque;
+    TableModifier tableModifier = new TableModifier();
 
     public ListarEstoque(HashEstoque estoque) {
         this.hashEstoque = estoque;
         initComponents();
 
-        tableADD(this.hashEstoque);
+        tableModifier.tableAddEstoque(hashEstoque, tabelaEstoque);
     }
 
-    private void tableADD(HashEstoque estoque) {
-        ((DefaultTableModel) tabelaEstoque.getModel()).removeRow(0);
 
-        HashEstoque.EstruturaEstoque[] estoqueArrayAux = new HashEstoque.EstruturaEstoque[this.hashEstoque.getTamanho()];
-        HashEstoque.EstruturaEstoque[] aux = estoque.getTabela();
-        int auxIndex = 0;
-        for (HashEstoque.EstruturaEstoque estoqueArray1 : aux) {
-            if (estoqueArray1 != null) {
-                estoqueArrayAux[auxIndex] = estoqueArray1;
-                auxIndex++;
-            }
-        }
-        HashEstoque.EstruturaEstoque[] estoqueArray = estoqueArrayAux;
-
-        for (int i = 0; i < auxIndex; i++) {
-            HashEstoque.EstruturaEstoque estoqueArray1 = estoqueArray[i];
-            if (estoqueArray1 != null) {
-                ((DefaultTableModel) tabelaEstoque.getModel()).addRow(new Object[]{estoqueArray1.getItem(), estoqueArray1.getQuantidade(), estoqueArray1.getPrecoUnit()});
-            }
-        }
-
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

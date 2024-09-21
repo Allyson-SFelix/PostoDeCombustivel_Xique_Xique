@@ -5,6 +5,13 @@
 package com.posto.xiquexique;
 
 /**
+ * Classe principal de interface gráfica referente ao estoque
+ * 
+ * Acessa os seguintes menus:
+ * - Inserir
+ * - Editar
+ * - Remover
+ * - Listar
  *
  * @author aliran
  */
@@ -140,7 +147,8 @@ public class EstoqueMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
-        // TODO add your handling code here:
+        EditarEstoque editar = new EditarEstoque(this.hashEstoque);
+        editar.setVisible(true);
     }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed

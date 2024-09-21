@@ -6,6 +6,13 @@ package com.posto.xiquexique;
 
 
 /**
+ * Classe que insere um item no estoque e o armazena na tabela hash
+ * Utiliza a classe HashEstoque para inserir o item
+ * Funções:
+ * - Inserir um item no estoque
+ * - Confirmar a inserção do item
+ * - Sair da tela de inserção
+ * Utilizando de tratativas para evitar erros de inserção
  *
  * @author aliran
  */

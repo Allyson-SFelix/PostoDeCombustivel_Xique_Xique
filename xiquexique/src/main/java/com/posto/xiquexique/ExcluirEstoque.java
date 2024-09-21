@@ -4,51 +4,27 @@
  */
 package com.posto.xiquexique;
 
-import javax.swing.table.DefaultTableModel;
-
 /**
- *
+ * Classe que implementa a interface gráfica para excluir um item do estoque
+ * Excluindo um item do estoque, o item é removido da tabela hash e da tabela na interface gráfica
+ * 
+ * 
  * @author aliran
  */
 public class ExcluirEstoque extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
 
+    TableModifier tableModifier = new TableModifier();
     /**
      * Creates new form ExcluirEstoque
      */
     public ExcluirEstoque(HashEstoque estoque) {
         this.hashEstoque = estoque;
         initComponents();
-        tableAdd(estoque);
+        tableModifier.tableAddEstoque(estoque, tabelaEstoque);
     }
 
-    private void tableAdd(HashEstoque estoque) {
-        tableClear();
-
-        HashEstoque.EstruturaEstoque[] estoqueArrayAux = new HashEstoque.EstruturaEstoque[this.hashEstoque.getTamanho()];
-        HashEstoque.EstruturaEstoque[] aux = estoque.getTabela();
-        int auxIndex = 0;
-        for (HashEstoque.EstruturaEstoque estoqueItem : aux) {
-            if (estoqueItem != null) {
-                estoqueArrayAux[auxIndex] = estoqueItem;
-                auxIndex++;
-            }
-        }
-        HashEstoque.EstruturaEstoque[] estoqueArray = estoqueArrayAux;
-
-        for (int i = 0; i < auxIndex; i++) {
-            HashEstoque.EstruturaEstoque estoqueItem = estoqueArray[i];
-            if (estoqueItem != null) {
-                ((DefaultTableModel) tabelaEstoque.getModel()).addRow(new Object[]{estoqueItem.getItem(), estoqueItem.getQuantidade(), estoqueItem.getPrecoUnit()});
-            }
-        }
-    }
-
-    private void tableClear() {
-        DefaultTableModel model = (DefaultTableModel) tabelaEstoque.getModel();
-        model.setRowCount(0);
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -205,7 +181,7 @@ public class ExcluirEstoque extends javax.swing.JFrame {
         }
         this.hashEstoque.remover(item);
 
-        tableAdd(this.hashEstoque);
+        this.tableModifier.tableAddEstoque(this.hashEstoque, tabelaEstoque);
 
         campoTexto.setText("");
 
