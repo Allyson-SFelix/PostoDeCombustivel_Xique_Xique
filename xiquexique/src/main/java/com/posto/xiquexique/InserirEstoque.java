@@ -4,7 +4,15 @@
  */
 package com.posto.xiquexique;
 
+
 /**
+ * Classe que insere um item no estoque e o armazena na tabela hash
+ * Utiliza a classe HashEstoque para inserir o item
+ * Funções:
+ * - Inserir um item no estoque
+ * - Confirmar a inserção do item
+ * - Sair da tela de inserção
+ * Utilizando de tratativas para evitar erros de inserção
  *
  * @author aliran
  */
@@ -13,7 +21,11 @@ public class InserirEstoque extends javax.swing.JFrame {
     /**
      * Creates new form EstoqueMenu
      */
-    public InserirEstoque() {
+    
+    HashEstoque hashEstoque;
+    
+    public InserirEstoque(HashEstoque estoque) {
+        this.hashEstoque = estoque;
         initComponents();
     }
 
@@ -26,9 +38,16 @@ public class InserirEstoque extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        campoAux = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        btnInserir = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
+        quantSpinner = new javax.swing.JSpinner();
+        campoNome = new javax.swing.JTextField();
+        campoPreco = new javax.swing.JTextField();
+        quantidade = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Estoque");
@@ -38,52 +57,207 @@ public class InserirEstoque extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(500, 400));
         setResizable(false);
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 400));
+
+        campoAux.setFocusable(false);
+        campoAux.setMaximumSize(new java.awt.Dimension(250, 30));
+        campoAux.setMinimumSize(new java.awt.Dimension(250, 30));
+        campoAux.setPreferredSize(new java.awt.Dimension(250, 30));
+        campoAux.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoAuxActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Inserir item no Estoque");
+        jLabel1.setPreferredSize(new java.awt.Dimension(180, 30));
+
+        btnInserir.setText("Adicionar no estoque");
+        btnInserir.setMinimumSize(new java.awt.Dimension(180, 30));
+        btnInserir.setPreferredSize(new java.awt.Dimension(180, 30));
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirActionPerformed(evt);
+            }
+        });
+
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnConfirmar.setMinimumSize(new java.awt.Dimension(100, 30));
+        btnConfirmar.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
+
+        quantSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 128, 1));
+        quantSpinner.setMinimumSize(new java.awt.Dimension(80, 30));
+        quantSpinner.setPreferredSize(new java.awt.Dimension(80, 30));
+
+        campoNome.setText("Nome");
+        campoNome.setMinimumSize(new java.awt.Dimension(80, 30));
+        campoNome.setPreferredSize(new java.awt.Dimension(80, 30));
+        campoNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoNomeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoNomeFocusLost(evt);
+            }
+        });
+
+        campoPreco.setText("Preço");
+        campoPreco.setMinimumSize(new java.awt.Dimension(80, 30));
+        campoPreco.setPreferredSize(new java.awt.Dimension(80, 30));
+        campoPreco.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoPrecoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoPrecoFocusLost(evt);
+            }
+        });
+
+        quantidade.setText("Quantidade:");
+        quantidade.setMinimumSize(new java.awt.Dimension(80, 30));
+        quantidade.setPreferredSize(new java.awt.Dimension(80, 30));
+
         btnSair.setText("Sair");
         btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSair.setPreferredSize(new java.awt.Dimension(90, 24));
+        btnSair.setMaximumSize(new java.awt.Dimension(100, 30));
+        btnSair.setMinimumSize(new java.awt.Dimension(100, 30));
+        btnSair.setPreferredSize(new java.awt.Dimension(100, 30));
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSairActionPerformed(evt);
             }
         });
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(campoAux, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)
+                        .addComponent(quantSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoPreco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(quantSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(campoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(campoAux, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(279, Short.MAX_VALUE)
-                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(75, 75, 75)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
-                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addGap(15, 15, 15)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void campoNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusGained
+        if(campoNome.getText().equals("Nome")){
+            campoNome.setText("");
+            
+        }
+        
+    }//GEN-LAST:event_campoNomeFocusGained
+    
+    private void campoNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusLost
+        if(campoNome.getText().equals("")){
+            campoNome.setText("Nome");
+        }
+    }//GEN-LAST:event_campoNomeFocusLost
+
+    private void campoPrecoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoPrecoFocusGained
+        if(campoPreco.getText().equals("Preço")){
+            campoPreco.setText("");
+            
+        }
+    }//GEN-LAST:event_campoPrecoFocusGained
+    
+    private void campoPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoPrecoFocusLost
+        if(campoPreco.getText().equals("")){
+            campoPreco.setText("Preço");
+            
+            
+        }
+    }//GEN-LAST:event_campoPrecoFocusLost
+
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        
+        if(campoNome.getText().equals("Nome") || campoPreco.getText().equals("Preco") || campoPreco.getText().equals("") || campoNome.getText().equals("")){
+            campoAux.setText("Preencha os campos corretamente");
+            return;
+        }
+        
+        String nome = campoNome.getText();
+        float preco = Float.parseFloat(campoPreco.getText());
+        int quantidadeLocal = (int) quantSpinner.getValue();
+
+
+        campoAux.setText("Nome: " + nome + " Preço: " + preco + " Quantidade: " + quantidadeLocal);
+    }//GEN-LAST:event_btnInserirActionPerformed
+
+    private void campoAuxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoAuxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoAuxActionPerformed
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        String nome = campoNome.getText();
+        float preco = Float.parseFloat(campoPreco.getText());
+        int quantidadeLocal = (int) quantSpinner.getValue();
+        if(!campoAux.getText().equals("")){
+            hashEstoque.inserir(nome, preco, quantidadeLocal);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,14 +289,21 @@ public class InserirEstoque extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InserirEstoque().setVisible(true);
+                new InserirEstoque(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnSair;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField campoAux;
+    private javax.swing.JTextField campoNome;
+    private javax.swing.JTextField campoPreco;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSpinner quantSpinner;
+    private javax.swing.JLabel quantidade;
     // End of variables declaration//GEN-END:variables
 }

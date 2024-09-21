@@ -1,9 +1,13 @@
-/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/Xiquexique.java
+/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/ExcluirEstoque.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/HashEstoque.java
-/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/VisualizarVendas.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/EstoqueMenu.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/LoginMenu.java
-/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/EstruturaVenda.java
-/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/AdicionarVendasMenu.java
+/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/TableModifier.java
+/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/EditarEstoque.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/VendasMenuFrame.java
+/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/Xiquexique.java
+/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/VisualizarVendas.java
+/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/EstruturaVenda.java
+/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/ListarEstoque.java
+/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/AdicionarVendasMenu.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/InserirEstoque.java

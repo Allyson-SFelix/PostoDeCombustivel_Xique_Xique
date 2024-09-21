@@ -19,7 +19,8 @@ public class Xiquexique {
         estoque = new HashEstoque();
         VendasMenuFrame vendasMenu = new VendasMenuFrame(estoque);
         vendasMenu.setVisible(true);
-
+        EstoqueMenu estoqueMenu = new EstoqueMenu(estoque);
+        estoqueMenu.setVisible(true); 
     }
     
 }
