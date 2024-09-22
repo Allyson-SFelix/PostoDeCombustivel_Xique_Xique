@@ -15,14 +15,14 @@ import javax.swing.table.DefaultTableModel;
  * - Sair do sistema
  * @author aliran
  */
-public class AdicionarVendasMenu extends javax.swing.JFrame {
+public class AdicionarVendas extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
 
     /**
      * Creates new form AdicionarVendasMenu
      */
-    public AdicionarVendasMenu(HashEstoque estoque) {
+    public AdicionarVendas(HashEstoque estoque) {
         this.hashEstoque = estoque;
         initComponents();
         comboBoxReload(estoque);
@@ -235,13 +235,13 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdicionarVendasMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdicionarVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         HashEstoque estoque = this.hashEstoque;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new AdicionarVendasMenu(estoque).setVisible(true);
+            new AdicionarVendas(estoque).setVisible(true);
         });
     }
 

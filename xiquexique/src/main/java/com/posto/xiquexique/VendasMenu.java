@@ -187,7 +187,7 @@ public class VendasMenu extends javax.swing.JFrame {
      * 
      */
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
-        AdicionarVendasMenu add = new AdicionarVendasMenu(hashEstoque);
+        AdicionarVendas add = new AdicionarVendas(hashEstoque);
         add.setVisible(true);
         
     }//GEN-LAST:event_AddActionPerformed
