@@ -50,9 +50,7 @@ public class MenuGerente extends javax.swing.JFrame {
 
         dialogMudarSenha.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         dialogMudarSenha.setTitle("Mudar Senha");
-        dialogMudarSenha.setMaximumSize(new java.awt.Dimension(500, 400));
         dialogMudarSenha.setMinimumSize(new java.awt.Dimension(500, 400));
-        dialogMudarSenha.setPreferredSize(new java.awt.Dimension(500, 400));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Senha Anterior");
@@ -316,6 +314,13 @@ public class MenuGerente extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MenuGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

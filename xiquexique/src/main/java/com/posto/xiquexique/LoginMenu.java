@@ -41,6 +41,7 @@ public class LoginMenu extends javax.swing.JFrame {
         PasswordField = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         btnEntrar = new javax.swing.JButton();
+        labelAux = new javax.swing.JLabel();
 
         alertChooseFunction.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         alertChooseFunction.setTitle("Função");
@@ -127,10 +128,15 @@ public class LoginMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
+        setMaximumSize(new java.awt.Dimension(500, 400));
+        setMinimumSize(new java.awt.Dimension(500, 400));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(100, 200));
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Login");
+        jLabel1.setMaximumSize(new java.awt.Dimension(100, 30));
+        jLabel1.setMinimumSize(new java.awt.Dimension(100, 30));
         jLabel1.setPreferredSize(new java.awt.Dimension(100, 30));
 
         UserField.setToolTipText("Usuario");
@@ -139,7 +145,10 @@ public class LoginMenu extends javax.swing.JFrame {
         PasswordField.setToolTipText("Senha");
         PasswordField.setPreferredSize(new java.awt.Dimension(100, 30));
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Senha");
+        jLabel2.setMaximumSize(new java.awt.Dimension(100, 30));
+        jLabel2.setMinimumSize(new java.awt.Dimension(100, 30));
         jLabel2.setPreferredSize(new java.awt.Dimension(100, 30));
 
         btnEntrar.setText("Entrar");
@@ -183,21 +192,30 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
+        labelAux.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelAux.setMaximumSize(new java.awt.Dimension(100, 30));
+        labelAux.setMinimumSize(new java.awt.Dimension(100, 30));
+        labelAux.setPreferredSize(new java.awt.Dimension(200, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addGap(150, 150, 150)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelAux, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addGap(70, 70, 70)
+                .addComponent(labelAux, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         pack();
@@ -207,12 +225,13 @@ public class LoginMenu extends javax.swing.JFrame {
         String password = new String(PasswordField.getPassword());
         String user = UserField.getText();
 
-        this.dispose();
         if (user.equals("admin") && password.equals("admin")) {
-            System.out.println("Login efetuado com sucesso");
+            labelAux.setText("Login efetuado com sucesso");
             alertChooseFunction.setVisible(true);
+            
+            this.dispose();
         } else {
-            System.out.println("Login ou senha incorretos");
+            labelAux.setText("Usuário ou senha incorretos");
         }
         
     }//GEN-LAST:event_btnEntrarActionPerformed
@@ -231,14 +250,20 @@ public class LoginMenu extends javax.swing.JFrame {
      * Abre o menu do frentista
      */
     private void btnFrentistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrentistaActionPerformed
-        // TODO add your handling code here:
+        alertChooseFunction.dispose();
+
+        MenuFrentista menuFrentista = new MenuFrentista(this.hashEstoque);
+        menuFrentista.setVisible(true);
     }//GEN-LAST:event_btnFrentistaActionPerformed
 
     /**
      * Abre o menu do atendente
      */
     private void btnAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtendenteActionPerformed
-        // TODO add your handling code here:
+        alertChooseFunction.dispose();
+
+        MenuAtendente menuAtendente = new MenuAtendente(this.hashEstoque);
+        menuAtendente.setVisible(true);
     }//GEN-LAST:event_btnAtendenteActionPerformed
 
     /**
@@ -283,5 +308,6 @@ public class LoginMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labelAux;
     // End of variables declaration//GEN-END:variables
 }
