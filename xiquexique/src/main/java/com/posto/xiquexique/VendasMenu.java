@@ -4,8 +4,6 @@
  */
 package com.posto.xiquexique;
 
-import javax.swing.table.DefaultTableModel;
-
 /**
  * Classe principal do sistema de vendas
  * Funções:
@@ -189,7 +187,7 @@ public class VendasMenu extends javax.swing.JFrame {
      * 
      */
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
-        AdicionarVendasMenu add = new AdicionarVendasMenu(hashEstoque);
+        AdicionarVendas add = new AdicionarVendas(hashEstoque);
         add.setVisible(true);
         
     }//GEN-LAST:event_AddActionPerformed
@@ -199,7 +197,7 @@ public class VendasMenu extends javax.swing.JFrame {
      * 
      */
     private void VendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendaActionPerformed
-        VisualizarVendas vizu = new VisualizarVendas(new EstruturaVenda(null,0f,0));
+        ListarVendas vizu = new ListarVendas(new EstruturaVenda(null,0f,0));
         vizu.setVisible(true);
     }//GEN-LAST:event_VendaActionPerformed
 

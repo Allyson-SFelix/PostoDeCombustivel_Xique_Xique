@@ -11,34 +11,34 @@ import javax.swing.table.DefaultTableModel;
  * Classe que implementa a interface gráfica de adicionar vendas
  * Funções:
  * - Adicionar um item a tabela de vendas
- * - Recarregar o comboBox1 com os itens do estoque
+ * - Recarregar o comboBoxEstoque com os itens do estoque
  * - Sair do sistema
  * @author aliran
  */
-public class AdicionarVendasMenu extends javax.swing.JFrame {
+public class AdicionarVendas extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
 
     /**
      * Creates new form AdicionarVendasMenu
      */
-    public AdicionarVendasMenu(HashEstoque estoque) {
+    public AdicionarVendas(HashEstoque estoque) {
         this.hashEstoque = estoque;
         initComponents();
         comboBoxReload(estoque);
     }
 
     /**
-     * Recarrega o comboBox1 com os itens do estoque
+     * Recarrega o comboBoxEstoque com os itens do estoque
      * 
      * @param estoque
      */
     private void comboBoxReload(HashEstoque estoque){
-        jComboBox1.removeAllItems();
+        comboBoxEstoque.removeAllItems();
         for(int i = 0; i < estoque.getTamanho(); i++){
             HashEstoque.EstruturaEstoque using = estoque.getTabela()[i];
             if(using!=null){
-                jComboBox1.addItem(using.getItem());
+                comboBoxEstoque.addItem(using.getItem());
             }
         }
     }
@@ -54,12 +54,12 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboBoxEstoque = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
-        jButton2 = new javax.swing.JButton();
+        btnAdicionar = new javax.swing.JButton();
+        spinnerQuantidade = new javax.swing.JSpinner();
+        btnConcluir = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -68,12 +68,12 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(400, 300));
         setName("AdicionarVenda"); // NOI18N
 
-        jComboBox1.setToolTipText("Itens em estoque");
-        jComboBox1.setMinimumSize(new java.awt.Dimension(90, 30));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(90, 30));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxEstoque.setToolTipText("Itens em estoque");
+        comboBoxEstoque.setMinimumSize(new java.awt.Dimension(90, 30));
+        comboBoxEstoque.setPreferredSize(new java.awt.Dimension(90, 30));
+        comboBoxEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboBoxEstoqueActionPerformed(evt);
             }
         });
 
@@ -109,21 +109,21 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
         jTable1.setShowHorizontalLines(true);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Adicionar");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setPreferredSize(new java.awt.Dimension(90, 30));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdicionar.setPreferredSize(new java.awt.Dimension(90, 30));
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAdicionarActionPerformed(evt);
             }
         });
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 255, 1));
-        jSpinner1.setToolTipText("Quantidade");
+        spinnerQuantidade.setModel(new javax.swing.SpinnerNumberModel(1, 1, 255, 1));
+        spinnerQuantidade.setToolTipText("Quantidade");
 
-        jButton2.setText("Concluido");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setPreferredSize(new java.awt.Dimension(90, 24));
+        btnConcluir.setText("Concluido");
+        btnConcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConcluir.setPreferredSize(new java.awt.Dimension(90, 24));
 
         btnSair.setText("Sair");
         btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -142,13 +142,13 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboBoxEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spinnerQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -159,24 +159,24 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinnerQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void comboBoxEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxEstoqueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_comboBoxEstoqueActionPerformed
 
     /**
      * Função de Sair do sistema
@@ -188,11 +188,11 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
                                           
     /**
      * Adiciona um item a tabela de vendas
-     * via jComboBox1 e jSpinner1 
+     * via comboBoxEstoque e spinnerQuantidade
      */
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        int quant = (int) jSpinner1.getValue();
-        String item = jComboBox1.getSelectedItem().toString();
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        int quant = (int) spinnerQuantidade.getValue();
+        String item = comboBoxEstoque.getSelectedItem().toString();
         HashEstoque.EstruturaEstoque using = hashEstoque.buscarItem(item);
 
         if(hashEstoque.retirarQuant(item, quant) == -1){
@@ -235,23 +235,23 @@ public class AdicionarVendasMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdicionarVendasMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdicionarVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         HashEstoque estoque = this.hashEstoque;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new AdicionarVendasMenu(estoque).setVisible(true);
+            new AdicionarVendas(estoque).setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnConcluir;
     private javax.swing.JButton btnSair;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> comboBoxEstoque;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JSpinner spinnerQuantidade;
     // End of variables declaration//GEN-END:variables
 }
