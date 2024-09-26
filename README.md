@@ -70,12 +70,6 @@ Implementado as seguintes funcionalidades:
         
 OBS: Para realizar a saída da opção selecionada no canto inferior da janela terá um botão denominado "Sair", sendo a única opção para saída da opção selecionada, contudo para fechar o programa é necessário fazer o logout e clicar na opção na parte superior a direita no botão "X".
 
-```markdown
-## Como Usar
-Após a instalação, execute o comando a seguir para iniciar a aplicação:
-```bash
-python main.py
-
 ## Contribuição
 Contribuições são bem-vindas! Para contribuir:
 1. Faça um *fork* do projeto.
