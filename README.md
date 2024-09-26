@@ -27,7 +27,7 @@ Implementado as seguintes funcionalidades:
 
     - Baixe e instale o JDK a partir do site oficial da Oracle: [JDK Downloads](https://www.oracle.com/java/technologies/javase-jdk21-downloads.html)
 
-2. **Ferramentas de Build **
+2. **Ferramentas de Build**
     - Maven: [Instalação do Maven](https://maven.apache.org/install.html)
 
 
