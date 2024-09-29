@@ -3,15 +3,14 @@ package com.posto.xiquexique;
 import javax.swing.table.DefaultTableModel;
 
 
-
 /**
  * Classe que modifica uma tabela
  * 
  * @author aliran
  */
-public class TableModifier extends javax.swing.JTable{
+public class Modificadores{
 
-    public TableModifier(){
+    public Modificadores(){
     }
 
     /**

@@ -17,7 +17,7 @@ public class VendasMenu extends javax.swing.JFrame {
 
 
     HashEstoque hashEstoque;
-    TableModifier tableModifier = new TableModifier();
+    Modificadores mod = new Modificadores();
 
     /**
      * Creates new form VendasMenu
@@ -26,7 +26,7 @@ public class VendasMenu extends javax.swing.JFrame {
         this.hashEstoque = estoque;
         initComponents();
 
-        tableModifier.tableAddEstoque(estoque, jTable1);
+        mod.tableAddEstoque(estoque, jTable1);
     }
 
 

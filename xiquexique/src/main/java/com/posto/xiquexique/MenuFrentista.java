@@ -14,11 +14,13 @@ package com.posto.xiquexique;
 public class MenuFrentista extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
+    EstruturaFuncionarios funcionarios;
 
     /**
      * Creates new form MenuGerente
      */
-    public MenuFrentista(HashEstoque estoque) {
+    public MenuFrentista(HashEstoque estoque, EstruturaFuncionarios func) {
+        this.funcionarios = func;
         this.hashEstoque = estoque;
         initComponents();
     }
@@ -110,7 +112,7 @@ public class MenuFrentista extends javax.swing.JFrame {
      */
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
-        LoginMenu login = new LoginMenu(hashEstoque);
+        LoginMenu login = new LoginMenu(hashEstoque, funcionarios);
         login.setVisible(true);
     }//GEN-LAST:event_btnSairActionPerformed
 
@@ -163,7 +165,7 @@ public class MenuFrentista extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuFrentista(null).setVisible(true);
+                new MenuFrentista(null,null).setVisible(true);
             }
         });
     }

@@ -11,11 +11,13 @@ package com.posto.xiquexique;
 public class LoginMenu extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
+    EstruturaFuncionarios funcionarios;
 
     /**
      * Creates new form LoginMenu
      */
-    public LoginMenu(HashEstoque estoque) {
+    public LoginMenu(HashEstoque estoque, EstruturaFuncionarios func) {
+        this.funcionarios = func;
         this.hashEstoque = estoque;
         initComponents();
     }
@@ -225,7 +227,7 @@ public class LoginMenu extends javax.swing.JFrame {
         String password = new String(PasswordField.getPassword());
         String user = UserField.getText();
 
-        if (user.equals("admin") && password.equals("admin")) {
+        if (user.equals(this.funcionarios.getNome()) && password.equals(this.funcionarios.getSenha())) {
             labelAux.setText("Login efetuado com sucesso");
             alertChooseFunction.setVisible(true);
             
@@ -242,7 +244,7 @@ public class LoginMenu extends javax.swing.JFrame {
     private void btnGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenteActionPerformed
         alertChooseFunction.dispose();
 
-        MenuGerente menuGerente = new MenuGerente(this.hashEstoque);
+        MenuGerente menuGerente = new MenuGerente(this.hashEstoque, this.funcionarios);
         menuGerente.setVisible(true);
     }//GEN-LAST:event_btnGerenteActionPerformed
 
@@ -252,7 +254,7 @@ public class LoginMenu extends javax.swing.JFrame {
     private void btnFrentistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrentistaActionPerformed
         alertChooseFunction.dispose();
 
-        MenuFrentista menuFrentista = new MenuFrentista(this.hashEstoque);
+        MenuFrentista menuFrentista = new MenuFrentista(this.hashEstoque, this.funcionarios);
         menuFrentista.setVisible(true);
     }//GEN-LAST:event_btnFrentistaActionPerformed
 
@@ -262,7 +264,7 @@ public class LoginMenu extends javax.swing.JFrame {
     private void btnAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtendenteActionPerformed
         alertChooseFunction.dispose();
 
-        MenuAtendente menuAtendente = new MenuAtendente(this.hashEstoque);
+        MenuAtendente menuAtendente = new MenuAtendente(this.hashEstoque, this.funcionarios);
         menuAtendente.setVisible(true);
     }//GEN-LAST:event_btnAtendenteActionPerformed
 
@@ -291,7 +293,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new LoginMenu(null).setVisible(true);
+            new LoginMenu(null,null).setVisible(true);
         });
     }
 

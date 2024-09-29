@@ -4,6 +4,8 @@
  */
 package com.posto.xiquexique;
 
+import java.lang.management.ThreadInfo;
+
 /**
  * Classe para o menu do gerente
  * 
@@ -14,11 +16,12 @@ package com.posto.xiquexique;
 public class MenuGerente extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
-
+    EstruturaFuncionarios funcionarios;
     /**
      * Creates new form MenuGerente
      */
-    public MenuGerente(HashEstoque estoque) {
+    public MenuGerente(HashEstoque estoque, EstruturaFuncionarios func) {
+        this.funcionarios = func;
         this.hashEstoque = estoque;
         initComponents();
     }
@@ -236,7 +239,7 @@ public class MenuGerente extends javax.swing.JFrame {
      */
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
-        LoginMenu login = new LoginMenu(hashEstoque);
+        LoginMenu login = new LoginMenu(hashEstoque, funcionarios);
         login.setVisible(true);
     }//GEN-LAST:event_btnSairActionPerformed
 
@@ -263,11 +266,14 @@ public class MenuGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMudarSenhaActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+
         if(new String(passfieldSenhaAntiga.getPassword()).equals("")){
             campoAux.setText("Digite a senha antiga!");
         } else if(new String(passfieldNovaSenha.getPassword()).equals(new String(passfieldSenhaAntiga.getPassword()))){
             campoAux.setText("A nova senha não pode ser igual a antiga!");
-
+        }
+        else if(!new String(passfieldSenhaAntiga.getPassword()).equals(this.funcionarios.getSenha())){
+            campoAux.setText("Senha antiga incorreta!");
         } else if(new String(passfieldNovaSenha.getPassword()).equals("")){
             campoAux.setText("Digite a nova senha!");
         } else if(new String(passfieldConfirma.getPassword()).equals("")){
@@ -279,6 +285,7 @@ public class MenuGerente extends javax.swing.JFrame {
                 Thread.sleep(2000); // Espera por 2 segundos
             } catch (InterruptedException e) {
             }
+            this.funcionarios.setSenha(new String(passfieldNovaSenha.getPassword()));
             dialogMudarSenha.dispose();
         } else {
             campoAux.setText("As senhas não coincidem!");
@@ -326,7 +333,7 @@ public class MenuGerente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuGerente(null).setVisible(true);
+                new MenuGerente(null,null).setVisible(true);
             }
         });
     }

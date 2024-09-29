@@ -14,14 +14,16 @@ package com.posto.xiquexique;
 public class Xiquexique {
     
     private static HashEstoque estoque;
+    private static EstruturaFuncionarios funcionarios;
 
     public Xiquexique() {
         estoque = new HashEstoque();
     }
 
     public static void main(String[] args) {
+        funcionarios = new EstruturaFuncionarios("admin", "00000000000", "admin");
         estoque = new HashEstoque();
-        LoginMenu loginMenu = new LoginMenu(estoque);
+        LoginMenu loginMenu = new LoginMenu(estoque, funcionarios);
         loginMenu.setVisible(true);
         
         
