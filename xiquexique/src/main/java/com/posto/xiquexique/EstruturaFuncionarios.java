@@ -106,14 +106,42 @@ public class EstruturaFuncionarios {
     }
     // </editor-fold>
     
+
+    private EstruturaFuncionarios balancear(EstruturaFuncionarios root){
+        root.altura = Math.max(altura(root.esquerda), altura(root.direita)) + 1;
+
+        int balance = getBalance(root);
+
+        // Caso de Desbalanceamento Esquerda-Esquerda
+        if (balance > 1 && getBalance(root.esquerda) >= 0)
+            return rotacaoDireita(root);
+
+        // Caso de Desbalanceamento Esquerda-Direita
+        if (balance > 1 && getBalance(root.esquerda) < 0) {
+            return rotacaoDuplaDireita(root);
+        }
+
+        // Caso de Desbalanceamento Direita-Direita
+        if (balance < -1 && getBalance(root.direita) <= 0)
+            return rotacaoEsquerda(root);
+
+        // Caso de Desbalanceamento Direita-Esquerda
+        if (balance < -1 && getBalance(root.direita) > 0) {
+            return rotacaoDuplaEsquerda(root);
+        }
+
+        // Caso de árvore balanceada
+        return root;
+    }
+
     /**
      * Insere um novo funcionário na árvore
      * e balanceia a árvore
      * 
      * @param novo Funcionário a ser inserido
      */
-    public EstruturaFuncionarios inserir(EstruturaFuncionarios novo) {
-        return this.inserir(this, novo);
+    public void inserir(EstruturaFuncionarios novo) {
+        this.inserir(this,novo);
     }
 
     /**
@@ -125,7 +153,6 @@ public class EstruturaFuncionarios {
      * @return Árvore com o novo funcionário inserido e balanceada
      */
     private EstruturaFuncionarios inserir(EstruturaFuncionarios root, EstruturaFuncionarios novo) {
-        // Passo 1: Inserção normal de uma árvore binária de busca
         if (root == null)
             return (novo);
 
@@ -133,39 +160,19 @@ public class EstruturaFuncionarios {
             root.esquerda = inserir(root.esquerda, novo);
         else if (getOrdem(root, novo) > 0)
             root.direita = inserir(root.direita, novo);
-        else // Chaves duplicadas não são permitidas
+        else 
             return root;
 
-        // Passo 2: Atualizar a altura do nó ancestral
-        root.altura = 1 + Math.max(altura(root.esquerda), altura(root.direita));
 
-        // Passo 3: Obter o fator de balanceamento deste nó ancestral
-        int balance = getBalance(root);
-
-        // Passo 4: Realizar rotações apropriadas
-
-        // Caso de Desbalanceamento Esquerda-Esquerda
-        if (balance > 1 && getOrdem(root.esquerda, novo) < 0)
-            return rotacaoDireita(root);
-
-        // Caso de Desbalanceamento Direita-Direita
-        if (balance < -1 && getOrdem(root.direita, novo) > 0)
-            return rotacaoDireita(root);
-
-        // Caso de Desbalanceamento Esquerda-Direita
-        if (balance > 1 && getOrdem(root, novo) > 0) {
-            rotacaoDuplaDireita(root);
-        }
-
-        // Caso de Desbalanceamento Direita-Esquerda
-        if (balance < -1 && getOrdem(root, novo) < 0) {
-            rotacaoDuplaEsquerda(root);
-        }
-
-        // Retornar o ponteiro do nó (inalterado) caso esteja balanceado
-        return root;
+        return balancear(root);
     }
 
+    /**
+     * Exclui um funcionário da árvore
+     * 
+     * @param nome Nome do funcionário a ser excluído
+     * @return Árvore sem o funcionário excluído
+     */
     public EstruturaFuncionarios excluirNo(String nome) {
         EstruturaFuncionarios no = buscar(nome);
         if (no == null) {
@@ -174,6 +181,13 @@ public class EstruturaFuncionarios {
         return excluirNo(this, no);
     }
     
+    /**
+     * Exclui um funcionário da árvore
+     * 
+     * @param root Raiz da árvore
+     * @param deletando Funcionário a ser excluído
+     * @return Árvore sem o funcionário excluído
+     */
     public EstruturaFuncionarios excluirNo(EstruturaFuncionarios root, EstruturaFuncionarios deletando) {
         // Passo 1: Remoção normal de uma árvore binária de busca
         if (root == null)
@@ -203,7 +217,7 @@ public class EstruturaFuncionarios {
                 EstruturaFuncionarios temp = getMinValueNode(root.direita);
 
                 // Copiar o sucessor para o nó atual
-                root = temp;
+                copiarNo(temp, root);
 
                 // Remover o sucessor
                 root.direita = excluirNo(root.direita, temp);
@@ -214,33 +228,22 @@ public class EstruturaFuncionarios {
         if (root == null)
             return root;
 
-        // Passo 2: Atualizar a altura do nó atual
-        root.altura = Math.max(altura(root.esquerda), altura(root.direita)) + 1;
+        return balancear(root);
+    }
 
-        // Passo 3: Obter o fator de balanceamento deste nó
-        int balance = getBalance(root);
-
-        // Passo 4: Realizar rotações apropriadas
-
-        // Caso de Desbalanceamento Esquerda-Esquerda
-        if (balance > 1 && getBalance(root.esquerda) >= 0)
-            return rotacaoDireita(root);
-
-        // Caso de Desbalanceamento Esquerda-Direita
-        if (balance > 1 && getBalance(root.esquerda) < 0) {
-            return rotacaoDuplaDireita(root);
-        }
-
-        // Caso de Desbalanceamento Direita-Direita
-        if (balance < -1 && getBalance(root.direita) <= 0)
-            return rotacaoEsquerda(root);
-
-        // Caso de Desbalanceamento Direita-Esquerda
-        if (balance < -1 && getBalance(root.direita) > 0) {
-            return rotacaoDuplaEsquerda(root);
-        }
-
-        return root;
+    /**
+     * Copia um No da arvore para outro
+     * 
+     * @param origem No a ser copiado
+     * @param destino No que receberá a cópia
+     */
+    public void copiarNo(EstruturaFuncionarios origem, EstruturaFuncionarios destino){
+        destino.setNome(origem.getNome());
+        destino.setCpf(origem.getCpf());
+        destino.setSenha(origem.getSenha());
+        destino.setEsquerda(origem.getEsquerda());
+        destino.setDireita(origem.getDireita());
+        destino.setAltura(origem.getAltura());
     }
 
     /**
@@ -275,6 +278,11 @@ public class EstruturaFuncionarios {
         return N.altura;
     }
 
+    /**
+     * Rotação à direita de um nó da árvore AVL
+     * @param y Nó a ser rotacionado
+     * @return Árvore rotacionada à direita
+     */
     private EstruturaFuncionarios rotacaoDireita(EstruturaFuncionarios y) {
         EstruturaFuncionarios x = y.esquerda;
         EstruturaFuncionarios T2 = x.direita;
@@ -291,7 +299,11 @@ public class EstruturaFuncionarios {
         return x;
     }
 
-    // Função para fazer uma rotação à esquerda
+    /**
+     * Rotação à esquerda de um nó da árvore AVL
+     * @param x Nó a ser rotacionado
+     * @return Árvore rotacionada à esquerda
+     */
     private EstruturaFuncionarios rotacaoEsquerda(EstruturaFuncionarios x) {
         EstruturaFuncionarios y = x.direita;
         EstruturaFuncionarios T2 = y.esquerda;
@@ -309,35 +321,12 @@ public class EstruturaFuncionarios {
     }
 
 
-
-    /**
-     * Rotação à direita
-     * 
-     * @return Árvore rotacionada à direita
-     */
-    public EstruturaFuncionarios rotacaoDireita() {
-        return this.rotacaoDireita(this);
-    }
-
-    /**
-     * Rotação à esquerda
-     * 
-     * @return Árvore rotacionada à esquerda
-     */
-    public EstruturaFuncionarios rotacaoEsquerda() {
-        return this.rotacaoEsquerda(this);
-    }
-
     /**
      * Rotação dupla à direita
      * 
+     * @param y Nó a ser rotacionado
      * @return Árvore rotacionada duplamente à direita
      */
-    public EstruturaFuncionarios rotacaoDuplaDireita() {
-        this.esquerda = this.esquerda.rotacaoEsquerda();
-        return this.rotacaoDireita();
-    }
-
     private EstruturaFuncionarios rotacaoDuplaDireita(EstruturaFuncionarios y) {
         y.esquerda = rotacaoEsquerda(y.esquerda);
         return rotacaoDireita(y);
@@ -346,13 +335,9 @@ public class EstruturaFuncionarios {
     /**
      * Rotação dupla à esquerda
      * 
+     * @param x Nó a ser rotacionado
      * @return Árvore rotacionada duplamente à esquerda
      */
-    public EstruturaFuncionarios rotacaoDuplaEsquerda() {
-        this.direita = this.direita.rotacaoDireita();
-        return this.rotacaoEsquerda();
-    }
-
     private EstruturaFuncionarios rotacaoDuplaEsquerda(EstruturaFuncionarios x) {
         x.direita = rotacaoDireita(x.direita);
         return rotacaoEsquerda(x);
