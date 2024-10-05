@@ -43,7 +43,7 @@ public class EstruturaFuncionarios {
         if(this.nome.startsWith("f")){
             return "frentista";
         } else if(this.nome.startsWith("v")){
-            return "vendedor";
+            return "atendente";
         } else {
             return "gerente";
         }

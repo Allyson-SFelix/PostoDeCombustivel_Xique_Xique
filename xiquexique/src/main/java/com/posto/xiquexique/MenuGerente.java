@@ -472,10 +472,6 @@ public class MenuGerente extends javax.swing.JFrame {
             }
 
             labelInfos.setText("Funcionário adicionado com sucesso!");
-            try {
-                Thread.sleep(2000); // Espera por 2 segundos
-            } catch (InterruptedException e) {
-            }
             javax.swing.JOptionPane.showConfirmDialog(
                 null, 
                 "Seu nome de usuario é " + campoNomeAdd, 
