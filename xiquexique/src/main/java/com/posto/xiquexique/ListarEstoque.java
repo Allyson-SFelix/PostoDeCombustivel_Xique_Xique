@@ -18,7 +18,7 @@ public class ListarEstoque extends javax.swing.JFrame {
      * Creates new form EstoqueMenu
      */
     HashEstoque hashEstoque;
-    Modificadores mod = new Modificadores();
+    Auxiliar mod = new Auxiliar();
 
     public ListarEstoque(HashEstoque estoque) {
         this.hashEstoque = estoque;

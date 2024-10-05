@@ -19,6 +19,8 @@ public class EstruturaFuncionarios {
     private EstruturaFuncionarios direita;
     private int altura;
 
+
+
     /**
      * Construtor da classe
      * 
@@ -31,11 +33,21 @@ public class EstruturaFuncionarios {
         this.cpf = cpf;
         this.senha = senha;
 
-        this.esquerda = null;
-        this.direita = null;
+        esquerda = direita = null;
     }
 
+
     // <editor-fold defaultstate="collapsed" desc="Getters e Setters">
+
+    public String getFuncao(){
+        if(this.nome.startsWith("f")){
+            return "frentista";
+        } else if(this.nome.startsWith("v")){
+            return "vendedor";
+        } else {
+            return "gerente";
+        }
+    }
 
     private EstruturaFuncionarios getMinValueNode(EstruturaFuncionarios node) {
         EstruturaFuncionarios current = node;
@@ -106,6 +118,32 @@ public class EstruturaFuncionarios {
     }
     // </editor-fold>
     
+    public void inserirFuncionarios(String nome, String cpf, String senha){
+        EstruturaFuncionarios novo = new EstruturaFuncionarios(nome, cpf, senha);
+        if(nome.startsWith("f")){
+            inserirFrentista(novo);
+        } else {
+            inserirVendedor(novo);
+        }
+    }
+
+    private void inserirFrentista(EstruturaFuncionarios novo){
+        if(this.esquerda == null){
+            this.esquerda = novo;
+        } else {
+            this.esquerda.inserir(novo);
+        }
+    }
+
+    private void inserirVendedor(EstruturaFuncionarios novo){
+        if(this.direita == null){
+            this.direita = novo;
+        } else {
+            this.direita.inserir(novo);
+        }
+    }
+
+    
 
     private EstruturaFuncionarios balancear(EstruturaFuncionarios root){
         root.altura = Math.max(altura(root.esquerda), altura(root.direita)) + 1;
@@ -140,7 +178,7 @@ public class EstruturaFuncionarios {
      * 
      * @param novo Funcionário a ser inserido
      */
-    public void inserir(EstruturaFuncionarios novo) {
+    private void inserir(EstruturaFuncionarios novo) {
         this.inserir(this,novo);
     }
 
@@ -255,17 +293,30 @@ public class EstruturaFuncionarios {
     public EstruturaFuncionarios buscar(String nome) {
         if (this.nome.equals(nome)) {
             return this;
-        } else if (this.nome.compareTo(nome) < 0) {
-            if (this.esquerda == null) {
+        } else if (nome.startsWith("f")){
+            return this.esquerda.buscar(nome, true);
+        } else if (nome.startsWith("v")){
+            return this.direita.buscar(nome, false);
+        } else {
+            return null;
+        }
+
+    }
+
+    private EstruturaFuncionarios buscar(String nome, boolean b){
+        if(this.nome.equals(nome)){
+            return this;
+        } else if(this.nome.compareTo(nome) < 0){
+            if(this.esquerda == null){
                 return null;
             } else {
-                return this.esquerda.buscar(nome);
+                return this.esquerda.buscar(nome, b);
             }
         } else {
-            if (this.direita == null) {
+            if(this.direita == null){
                 return null;
             } else {
-                return this.direita.buscar(nome);
+                return this.direita.buscar(nome, b);
             }
         }
     }

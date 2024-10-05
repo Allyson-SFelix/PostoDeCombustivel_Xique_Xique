@@ -15,7 +15,7 @@ public class ExcluirEstoque extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
 
-    Modificadores mod = new Modificadores();
+    Auxiliar mod = new Auxiliar();
     /**
      * Creates new form ExcluirEstoque
      */

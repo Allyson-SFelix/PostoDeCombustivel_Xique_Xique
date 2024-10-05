@@ -8,9 +8,9 @@ import javax.swing.table.DefaultTableModel;
  * 
  * @author aliran
  */
-public class Modificadores{
+public class Auxiliar{
 
-    public Modificadores(){
+    public Auxiliar(){
     }
 
     /**

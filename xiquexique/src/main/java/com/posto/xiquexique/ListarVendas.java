@@ -12,7 +12,7 @@ package com.posto.xiquexique;
 public class ListarVendas extends javax.swing.JFrame {
 
     EstruturaVenda venda;
-    Modificadores mod = new Modificadores();
+    Auxiliar mod = new Auxiliar();
  
     /**
      * Creates new form ListarVendas

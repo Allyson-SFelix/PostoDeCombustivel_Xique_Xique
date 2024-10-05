@@ -193,13 +193,12 @@ public class AdicionarVendas extends javax.swing.JFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {                                         
         int quant = (int) spinnerQuantidade.getValue();
         String item = comboBoxEstoque.getSelectedItem().toString();
-        HashEstoque.EstruturaEstoque using = hashEstoque.buscarItem(item);
 
         if(hashEstoque.retirarQuant(item, quant) == -1){
             JOptionPane.showMessageDialog(null, "Quantidade insuficiente ou Item não encontrado");
             return;
         }
-        EstruturaVenda estruturaVendas = new EstruturaVenda(item, using.getPrecoUnit(), quant);
+        EstruturaVenda estruturaVendas = new EstruturaVenda(item, hashEstoque.buscarItem(item).getPrecoUnit(), quant);
         
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 

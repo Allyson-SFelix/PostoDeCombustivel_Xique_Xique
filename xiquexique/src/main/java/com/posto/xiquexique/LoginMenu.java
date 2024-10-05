@@ -227,10 +227,23 @@ public class LoginMenu extends javax.swing.JFrame {
         String password = new String(PasswordField.getPassword());
         String user = UserField.getText();
 
-        if (user.equals(this.funcionarios.getNome()) && password.equals(this.funcionarios.getSenha())) {
+        EstruturaFuncionarios busca = funcionarios.buscar(user);
+
+        if (user.equals(busca.getNome()) && password.equals(busca.getSenha())) {
             labelAux.setText("Login efetuado com sucesso");
-            alertChooseFunction.setVisible(true);
-            
+            switch (busca.getFuncao()) {
+                case "gerente" -> alertChooseFunction.setVisible(true);
+                case "frentista" -> {
+                    MenuFrentista menuFrentista = new MenuFrentista(this.hashEstoque, this.funcionarios);
+                    menuFrentista.setVisible(true);
+                }
+                case "atendente" -> {
+                    MenuAtendente menuAtendente = new MenuAtendente(this.hashEstoque, this.funcionarios);
+                    menuAtendente.setVisible(true);
+                }
+                default -> {
+                }
+            }
             this.dispose();
         } else {
             labelAux.setText("Usuário ou senha incorretos");

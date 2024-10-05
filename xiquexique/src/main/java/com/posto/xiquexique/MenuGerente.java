@@ -5,6 +5,7 @@
 package com.posto.xiquexique;
 
 import java.lang.management.ThreadInfo;
+import java.text.ParseException;
 
 /**
  * Classe para o menu do gerente
@@ -44,6 +45,25 @@ public class MenuGerente extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnConfirmar = new javax.swing.JButton();
         campoAux = new javax.swing.JTextPane();
+        addFuncFrame = new javax.swing.JFrame();
+        labelInfos = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        textFieldNome = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        passAddFunc = new javax.swing.JPasswordField();
+        radioFrentista = new javax.swing.JRadioButton();
+        radioVendedor = new javax.swing.JRadioButton();
+        btnSairAddFunc = new javax.swing.JButton();
+        btnConfirmarAddFunc = new javax.swing.JButton();
+        javax.swing.text.MaskFormatter cpfFormatter = null;
+        try {
+            cpfFormatter = new javax.swing.text.MaskFormatter("###.###.###-##");
+            cpfFormatter.setPlaceholderCharacter('_');
+        } catch (ParseException e) {
+        }
+        textFieldCpf = new javax.swing.JFormattedTextField();
+        btnSelecaoFunc = new javax.swing.ButtonGroup();
         btnVendas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnEstoque = new javax.swing.JButton();
@@ -145,6 +165,127 @@ public class MenuGerente extends javax.swing.JFrame {
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
+        addFuncFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addFuncFrame.setTitle("Adicionar Funcionario");
+        addFuncFrame.setMinimumSize(new java.awt.Dimension(400, 300));
+        addFuncFrame.setResizable(false);
+
+        labelInfos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelInfos.setText("Insira os dados");
+        labelInfos.setPreferredSize(new java.awt.Dimension(300, 30));
+
+        jLabel6.setText("Nome:");
+        jLabel6.setMaximumSize(new java.awt.Dimension(150, 30));
+        jLabel6.setMinimumSize(new java.awt.Dimension(150, 30));
+        jLabel6.setPreferredSize(new java.awt.Dimension(150, 30));
+
+        textFieldNome.setMaximumSize(new java.awt.Dimension(150, 30));
+        textFieldNome.setMinimumSize(new java.awt.Dimension(150, 30));
+        textFieldNome.setPreferredSize(new java.awt.Dimension(150, 30));
+
+        jLabel7.setText("CPF:");
+        jLabel7.setMaximumSize(new java.awt.Dimension(150, 30));
+        jLabel7.setMinimumSize(new java.awt.Dimension(150, 30));
+        jLabel7.setPreferredSize(new java.awt.Dimension(150, 30));
+
+        jLabel8.setText("Senha");
+        jLabel8.setMaximumSize(new java.awt.Dimension(150, 30));
+        jLabel8.setMinimumSize(new java.awt.Dimension(150, 30));
+        jLabel8.setPreferredSize(new java.awt.Dimension(150, 30));
+
+        passAddFunc.setMaximumSize(new java.awt.Dimension(150, 30));
+        passAddFunc.setMinimumSize(new java.awt.Dimension(150, 30));
+        passAddFunc.setPreferredSize(new java.awt.Dimension(150, 30));
+
+        btnSelecaoFunc.add(radioFrentista);
+        radioFrentista.setText("Frentista");
+        radioFrentista.setMaximumSize(new java.awt.Dimension(90, 30));
+        radioFrentista.setMinimumSize(new java.awt.Dimension(90, 30));
+        radioFrentista.setPreferredSize(new java.awt.Dimension(90, 30));
+
+        btnSelecaoFunc.add(radioVendedor);
+        radioVendedor.setText("Vendedor");
+        radioVendedor.setMaximumSize(new java.awt.Dimension(90, 30));
+        radioVendedor.setMinimumSize(new java.awt.Dimension(90, 30));
+        radioVendedor.setPreferredSize(new java.awt.Dimension(90, 30));
+
+        btnSairAddFunc.setText("Sair");
+        btnSairAddFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairAddFuncActionPerformed(evt);
+            }
+        });
+
+        btnConfirmarAddFunc.setText("Confirmar");
+        btnConfirmarAddFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarAddFuncActionPerformed(evt);
+            }
+        });
+
+        textFieldCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(cpfFormatter));
+
+        javax.swing.GroupLayout addFuncFrameLayout = new javax.swing.GroupLayout(addFuncFrame.getContentPane());
+        addFuncFrame.getContentPane().setLayout(addFuncFrameLayout);
+        addFuncFrameLayout.setHorizontalGroup(
+            addFuncFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addFuncFrameLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(addFuncFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addFuncFrameLayout.createSequentialGroup()
+                        .addComponent(btnSairAddFunc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnConfirmarAddFunc))
+                    .addComponent(labelInfos, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, addFuncFrameLayout.createSequentialGroup()
+                        .addComponent(radioFrentista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, addFuncFrameLayout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, addFuncFrameLayout.createSequentialGroup()
+                        .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passAddFunc, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        addFuncFrameLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {textFieldCpf, textFieldNome});
+
+        addFuncFrameLayout.setVerticalGroup(
+            addFuncFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addFuncFrameLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(labelInfos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(addFuncFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(addFuncFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(textFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passAddFunc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(addFuncFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(radioFrentista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radioVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(addFuncFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSairAddFunc)
+                    .addComponent(btnConfirmarAddFunc))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        addFuncFrameLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {textFieldCpf, textFieldNome});
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
@@ -175,6 +316,11 @@ public class MenuGerente extends javax.swing.JFrame {
         btnAddFunc.setMaximumSize(new java.awt.Dimension(170, 30));
         btnAddFunc.setMinimumSize(new java.awt.Dimension(170, 30));
         btnAddFunc.setPreferredSize(new java.awt.Dimension(170, 30));
+        btnAddFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddFuncActionPerformed(evt);
+            }
+        });
 
         btnSair.setText("Sair");
         btnSair.setMaximumSize(new java.awt.Dimension(170, 30));
@@ -263,6 +409,7 @@ public class MenuGerente extends javax.swing.JFrame {
 
     private void btnMudarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMudarSenhaActionPerformed
         dialogMudarSenha.setVisible(true);
+        
     }//GEN-LAST:event_btnMudarSenhaActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
@@ -287,6 +434,7 @@ public class MenuGerente extends javax.swing.JFrame {
             }
             this.funcionarios.setSenha(new String(passfieldNovaSenha.getPassword()));
             dialogMudarSenha.dispose();
+            
         } else {
             campoAux.setText("As senhas não coincidem!");
         }
@@ -295,6 +443,55 @@ public class MenuGerente extends javax.swing.JFrame {
     private void passfieldNovaSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passfieldNovaSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passfieldNovaSenhaActionPerformed
+
+    private void btnAddFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFuncActionPerformed
+        addFuncFrame.setVisible(true);
+    }//GEN-LAST:event_btnAddFuncActionPerformed
+
+    private void btnConfirmarAddFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarAddFuncActionPerformed
+        String campoNomeAdd = textFieldNome.getText();
+        String campoCpfAdd = textFieldCpf.getText();
+        String campoSenhaAdd = new String(passAddFunc.getPassword());
+        if(campoNomeAdd.equals("")){
+            labelInfos.setText("Digite o nome!");
+        } else if(campoCpfAdd.equals("")){
+            labelInfos.setText("Digite o CPF!");
+        } else if(campoSenhaAdd.equals("")){
+            labelInfos.setText("Digite a senha!");
+        } else if(!radioFrentista.isSelected() && !radioVendedor.isSelected()){
+            labelInfos.setText("Selecione o tipo de funcionário!");
+        } else {
+            textFieldNome.setText(campoNomeAdd.toLowerCase());
+            //adicionar funcionário
+            if (radioFrentista.isSelected()) {
+                campoNomeAdd = "f" + campoNomeAdd;
+                this.funcionarios.inserirFuncionarios(campoNomeAdd, campoCpfAdd, campoSenhaAdd);
+            } else {
+                campoNomeAdd = "v" + campoNomeAdd;
+                this.funcionarios.inserirFuncionarios(campoNomeAdd, campoCpfAdd, campoSenhaAdd);
+            }
+
+            labelInfos.setText("Funcionário adicionado com sucesso!");
+            try {
+                Thread.sleep(2000); // Espera por 2 segundos
+            } catch (InterruptedException e) {
+            }
+            javax.swing.JOptionPane.showConfirmDialog(
+                null, 
+                "Seu nome de usuario é " + campoNomeAdd, 
+                "Aviso",
+                javax.swing.JOptionPane.OK_CANCEL_OPTION, 
+                javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+            addFuncFrame.setVisible(false);
+        }
+        
+    }//GEN-LAST:event_btnConfirmarAddFuncActionPerformed
+
+    private void btnSairAddFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairAddFuncActionPerformed
+        addFuncFrame.setVisible(false);
+        
+    }//GEN-LAST:event_btnSairAddFuncActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,11 +536,15 @@ public class MenuGerente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame addFuncFrame;
     private javax.swing.JButton btnAddFunc;
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnConfirmarAddFunc;
     private javax.swing.JButton btnEstoque;
     private javax.swing.JButton btnMudarSenha;
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnSairAddFunc;
+    private javax.swing.ButtonGroup btnSelecaoFunc;
     private javax.swing.JButton btnVendas;
     private javax.swing.JTextPane campoAux;
     private javax.swing.JDialog dialogMudarSenha;
@@ -351,8 +552,17 @@ public class MenuGerente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel labelInfos;
+    private javax.swing.JPasswordField passAddFunc;
     private javax.swing.JPasswordField passfieldConfirma;
     private javax.swing.JPasswordField passfieldNovaSenha;
     private javax.swing.JPasswordField passfieldSenhaAntiga;
+    private javax.swing.JRadioButton radioFrentista;
+    private javax.swing.JRadioButton radioVendedor;
+    private javax.swing.JFormattedTextField textFieldCpf;
+    private javax.swing.JTextField textFieldNome;
     // End of variables declaration//GEN-END:variables
 }
