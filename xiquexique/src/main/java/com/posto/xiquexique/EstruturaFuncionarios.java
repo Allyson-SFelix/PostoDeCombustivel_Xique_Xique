@@ -134,12 +134,14 @@ public class EstruturaFuncionarios {
     public int getQuantidadeVendida(int index){
         return this.vendas.get(index).getQuantidadeTotal();
     }
+
     // </editor-fold>
     
-    public void addVenda(HeapVenda venda, HashEstoque estoque){
+    public void addVenda(HeapVenda venda){
         if(this.vendas == null){
             this.vendas = new ArrayList<>();
         }
+        venda.setId(this.vendas.size()+1);
         this.vendas.add(venda);
     }
 

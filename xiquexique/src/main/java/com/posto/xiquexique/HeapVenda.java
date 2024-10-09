@@ -8,6 +8,7 @@ public class HeapVenda{
     private final EstruturaVenda[] heap;
     private int size;
     private final LocalDateTime creationTime;
+    private int id;
 
     public HeapVenda(HashEstoque estoque){
         heap = new EstruturaVenda[estoque.getEspacosPreenchidos()];
@@ -54,7 +55,7 @@ public class HeapVenda{
             return quantidade;
         }
 
-        public void setQuantidade(short quantidade) {
+        public void setQuantidade(int quantidade) {
             this.quantidade = quantidade;
         }
 
@@ -71,6 +72,14 @@ public class HeapVenda{
 
     public int getSize(){
         return size;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public EstruturaVenda[] getHeap(){
@@ -97,6 +106,15 @@ public class HeapVenda{
         return heap[index];
     }
 
+    public int search(String item){
+        for(int i = 0; i < size; i++){
+            if(heap[i].getItem().equals(item)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void insert(EstruturaVenda item){
         heap[size] = item;
         heapifyUp(size);
@@ -112,7 +130,7 @@ public class HeapVenda{
     }
 
     public void heapifyUp(int index){
-        int parent = (index-1)/2;
+        int parent = (index)/2;
         if(index > 0 && heap[index].valorTotal() > heap[parent].valorTotal()){
             swap(index, parent);
             heapifyUp(parent);

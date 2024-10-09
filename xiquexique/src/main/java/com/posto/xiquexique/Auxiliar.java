@@ -1,7 +1,11 @@
 package com.posto.xiquexique;
 
-import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Classe que modifica uma tabela
@@ -70,7 +74,24 @@ public class Auxiliar{
     }
 
     public void tableHeapVenda(EstruturaFuncionarios func, javax.swing.JTable tabelaVenda){
+        tableClear(tabelaVenda);
+        ArrayList<HeapVenda> vendas = func.getVendas();
+        if(vendas == null){
+            return;
+        }
+        if(vendas.isEmpty()){
+            return;
+        }
+        for(HeapVenda venda : vendas){
+            LocalDate data = venda.getCreationTime().toLocalDate();
+            LocalTime hora = venda.getCreationTime().toLocalTime();
         
+            DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
+            String dataFormatada = data.format(formatoData);
+            String horaFormatada = hora.format(formatoHora);
+            ((DefaultTableModel) tabelaVenda.getModel()).addRow(new Object[]{venda.getId(), dataFormatada, horaFormatada, venda.getQuantidadeTotal(), venda.getValorTotal()});
+        }
     }
  
     /**

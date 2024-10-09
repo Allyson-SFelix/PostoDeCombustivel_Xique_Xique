@@ -18,22 +18,20 @@ import javax.swing.table.DefaultTableModel;
 public class AdicionarVendas extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
-    HeapVenda vendas;
+    EstruturaFuncionarios funcionario;
     Auxiliar mod = new Auxiliar();
+    HeapVenda venda;
 
     /**
      * Creates new form AdicionarVendasMenu
      */
-    public AdicionarVendas(HashEstoque estoque, HeapVenda vendas) {
+    public AdicionarVendas(HashEstoque estoque, EstruturaFuncionarios func) {
         this.hashEstoque = estoque;
-        this.vendas = vendas;
+        this.funcionario = func;
+        this.venda = new HeapVenda(estoque);
         initComponents();
         mod.comboBoxReload(estoque, comboBoxEstoque);
     }
-
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -174,6 +172,7 @@ public class AdicionarVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxEstoqueActionPerformed
 
     private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
+        funcionario.addVenda(venda);
         this.dispose();
     }//GEN-LAST:event_btnConcluirActionPerformed
 
@@ -197,9 +196,19 @@ public class AdicionarVendas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Quantidade insuficiente ou Item não encontrado");
             return;
         }
-        vendas.insert(vendas.new EstruturaVenda(item, estoqueItem.getPrecoUnit(), quant));
-        mod.tableAddVenda(vendas, jTable1);
-        
+        HeapVenda.EstruturaVenda vendaItem = venda.new EstruturaVenda(item, estoqueItem.getPrecoUnit(), quant);
+        if(venda.search(item) != -1){
+            for(int i = 0; i < jTable1.getRowCount(); i++){
+                if(jTable1.getValueAt(i, 0).equals(item)){
+                    vendaItem.setQuantidade(quant + (int) jTable1.getValueAt(i, 1));
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.removeRow(i);
+                    
+                }
+            }
+        }
+        venda.insert(vendaItem);
+        mod.tableAddVenda(venda, jTable1);
     }
                                            
                                             

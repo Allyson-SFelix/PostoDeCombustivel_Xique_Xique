@@ -121,7 +121,7 @@ public class MenuFrentista extends javax.swing.JFrame {
      * Método para abrir a tela de vendas
      */
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        VendasMenu vendas = new VendasMenu(hashEstoque);
+        VendasMenu vendas = new VendasMenu(hashEstoque,funcionarios);
         vendas.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
