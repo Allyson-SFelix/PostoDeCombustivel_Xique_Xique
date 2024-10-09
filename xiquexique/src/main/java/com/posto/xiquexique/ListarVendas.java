@@ -12,7 +12,7 @@ package com.posto.xiquexique;
 public class ListarVendas extends javax.swing.JFrame {
 
     EstruturaVenda venda;
-    TableModifier tableModifier = new TableModifier();
+    Auxiliar mod = new Auxiliar();
  
     /**
      * Creates new form ListarVendas
@@ -20,7 +20,7 @@ public class ListarVendas extends javax.swing.JFrame {
     public ListarVendas(EstruturaVenda venda) {
         this.venda = venda;
         initComponents();
-        tableModifier.tableAddVenda(venda, tabelaEstoque);
+        mod.tableAddVenda(venda, tabelaEstoque);
     }
  
     /**

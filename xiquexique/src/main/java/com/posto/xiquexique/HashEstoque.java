@@ -121,6 +121,16 @@ public final class HashEstoque{
         return this.tabela;
     }
 
+    public int getEspacosPreenchidos(){
+        int count = 0;
+        HashEstoque.EstruturaEstoque[] aux = this.getTabela();
+        for (HashEstoque.EstruturaEstoque estoqueItem : aux) {
+            if (estoqueItem != null) {
+                count++;
+            }
+        }
+        return count;
+    }
     
     /**
      * Insere um item na tabela hash
