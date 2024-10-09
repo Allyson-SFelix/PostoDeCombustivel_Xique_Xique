@@ -61,9 +61,12 @@ public class Auxiliar{
         tableAddEstoque(estoque, tabelaEstoque, false);
     }
 
-    public void tableAddVenda(EstruturaVenda venda, javax.swing.JTable tabelaVenda){
+    public void tableAddVenda(HeapVenda venda, javax.swing.JTable tabelaVenda){
         tableClear(tabelaVenda);
-        ((DefaultTableModel) tabelaVenda.getModel()).addRow(new Object[]{venda.getItem(), venda.getQuantidadeVendida(), venda.getPrecoUnit(), venda.getQuantidadeVendida() * venda.getPrecoUnit()});
+        for(int i = 0; i < venda.getSize(); i++){
+            HeapVenda.EstruturaVenda vendaItem = venda.getHeap()[i];
+            ((DefaultTableModel) tabelaVenda.getModel()).addRow(new Object[]{vendaItem.getItem(), vendaItem.getQuantidadeVendida(), vendaItem.getPrecoUnit(), vendaItem.getQuantidadeVendida() * vendaItem.getPrecoUnit()});
+        }
     }
  
     /**
