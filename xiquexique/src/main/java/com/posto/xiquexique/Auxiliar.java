@@ -65,8 +65,12 @@ public class Auxiliar{
         tableClear(tabelaVenda);
         for(int i = 0; i < venda.getSize(); i++){
             HeapVenda.EstruturaVenda vendaItem = venda.getHeap()[i];
-            ((DefaultTableModel) tabelaVenda.getModel()).addRow(new Object[]{vendaItem.getItem(), vendaItem.getQuantidadeVendida(), vendaItem.getPrecoUnit(), vendaItem.getQuantidadeVendida() * vendaItem.getPrecoUnit()});
+            ((DefaultTableModel) tabelaVenda.getModel()).addRow(new Object[]{vendaItem.getItem(), vendaItem.getQuantidade(), vendaItem.getPrecoUnit(), vendaItem.valorTotal()});
         }
+    }
+
+    public void tableHeapVenda(EstruturaFuncionarios func, javax.swing.JTable tabelaVenda){
+        
     }
  
     /**
@@ -79,4 +83,19 @@ public class Auxiliar{
         model.setRowCount(0);
     }
     
+    /**
+     * Recarrega o comboBox com os itens do estoque
+     * 
+     * @param estoque
+     */
+    public void comboBoxReload(HashEstoque estoque, javax.swing.JComboBox<String> comboBoxEstoque){
+        comboBoxEstoque.removeAllItems();
+        for(int i = 0; i < estoque.getTamanho(); i++){
+            HashEstoque.EstruturaEstoque using = estoque.getTabela()[i];
+            if(using!=null){
+                comboBoxEstoque.addItem(using.getItem());
+            }
+        }
+    }
+
 }

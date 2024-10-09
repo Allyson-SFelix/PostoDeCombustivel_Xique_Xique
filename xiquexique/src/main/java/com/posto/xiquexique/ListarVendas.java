@@ -11,13 +11,13 @@ package com.posto.xiquexique;
  */
 public class ListarVendas extends javax.swing.JFrame {
 
-    EstruturaVenda venda;
+    HeapVenda venda;
     Auxiliar mod = new Auxiliar();
  
     /**
      * Creates new form ListarVendas
      */
-    public ListarVendas(EstruturaVenda venda) {
+    public ListarVendas(HeapVenda venda) {
         this.venda = venda;
         initComponents();
         mod.tableAddVenda(venda, tabelaEstoque);

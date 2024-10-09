@@ -4,6 +4,8 @@
  */
 package com.posto.xiquexique;
 
+import java.lang.reflect.Array;
+
 /**
  * Classe principal do sistema de vendas
  * Funções:
@@ -18,6 +20,7 @@ public class VendasMenu extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
     Auxiliar mod = new Auxiliar();
+    HeapVenda vendas[];
 
     /**
      * Creates new form VendasMenu
@@ -187,9 +190,16 @@ public class VendasMenu extends javax.swing.JFrame {
      * 
      */
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
-        AdicionarVendas add = new AdicionarVendas(hashEstoque);
+        
+        AdicionarVendas add = new AdicionarVendas(hashEstoque,vendas);
         add.setVisible(true);
         
+        add.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                mod.tableAddEstoque(hashEstoque, jTable1);
+            }
+        });
     }//GEN-LAST:event_AddActionPerformed
 
     /**
@@ -197,7 +207,7 @@ public class VendasMenu extends javax.swing.JFrame {
      * 
      */
     private void VendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendaActionPerformed
-        ListarVendas vizu = new ListarVendas(new EstruturaVenda(null,0f,0));
+        ListarVendas vizu = new ListarVendas(vendas);
         vizu.setVisible(true);
     }//GEN-LAST:event_VendaActionPerformed
 
