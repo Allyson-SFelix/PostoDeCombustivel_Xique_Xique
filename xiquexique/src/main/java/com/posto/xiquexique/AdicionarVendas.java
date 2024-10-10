@@ -18,32 +18,20 @@ import javax.swing.table.DefaultTableModel;
 public class AdicionarVendas extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
+    EstruturaFuncionarios funcionario;
+    Auxiliar mod = new Auxiliar();
+    HeapVenda venda;
 
     /**
      * Creates new form AdicionarVendasMenu
      */
-    public AdicionarVendas(HashEstoque estoque) {
+    public AdicionarVendas(HashEstoque estoque, EstruturaFuncionarios func) {
         this.hashEstoque = estoque;
+        this.funcionario = func;
+        this.venda = new HeapVenda(estoque);
         initComponents();
-        comboBoxReload(estoque);
+        mod.comboBoxReload(estoque, comboBoxEstoque);
     }
-
-    /**
-     * Recarrega o comboBoxEstoque com os itens do estoque
-     * 
-     * @param estoque
-     */
-    private void comboBoxReload(HashEstoque estoque){
-        comboBoxEstoque.removeAllItems();
-        for(int i = 0; i < estoque.getTamanho(); i++){
-            HashEstoque.EstruturaEstoque using = estoque.getTabela()[i];
-            if(using!=null){
-                comboBoxEstoque.addItem(using.getItem());
-            }
-        }
-    }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,6 +112,11 @@ public class AdicionarVendas extends javax.swing.JFrame {
         btnConcluir.setText("Concluido");
         btnConcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConcluir.setPreferredSize(new java.awt.Dimension(90, 24));
+        btnConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConcluirActionPerformed(evt);
+            }
+        });
 
         btnSair.setText("Sair");
         btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -178,6 +171,15 @@ public class AdicionarVendas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxEstoqueActionPerformed
 
+    private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
+        if(venda.getSize() == 0){
+            JOptionPane.showMessageDialog(null, "Nenhuma venda adicionada");
+            return;
+        }
+        funcionario.addVenda(venda);
+        this.dispose();
+    }//GEN-LAST:event_btnConcluirActionPerformed
+
     /**
      * Função de Sair do sistema
      */
@@ -193,26 +195,24 @@ public class AdicionarVendas extends javax.swing.JFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {                                         
         int quant = (int) spinnerQuantidade.getValue();
         String item = comboBoxEstoque.getSelectedItem().toString();
-
+        HashEstoque.EstruturaEstoque estoqueItem = hashEstoque.buscarItem(item);
         if(hashEstoque.retirarQuant(item, quant) == -1){
             JOptionPane.showMessageDialog(null, "Quantidade insuficiente ou Item não encontrado");
             return;
         }
-        EstruturaVenda estruturaVendas = new EstruturaVenda(item, hashEstoque.buscarItem(item).getPrecoUnit(), quant);
-        
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
-        for(int i = 0; i < model.getRowCount(); i++){
-            if(model.getValueAt(i, 0).equals(item)){
-                model.setValueAt((int)model.getValueAt(i, 1)+quant, i, 1);
-                model.setValueAt((float)model.getValueAt(i, 2), i, 2);
-                model.setValueAt((int)model.getValueAt(i, 1)*(float)model.getValueAt(i, 2), i, 3);
-                comboBoxReload(hashEstoque);
-                return;
+        HeapVenda.EstruturaVenda vendaItem = venda.new EstruturaVenda(item, estoqueItem.getPrecoUnit(), quant);
+        if(venda.search(item) != -1){
+            for(int i = 0; i < jTable1.getRowCount(); i++){
+                if(jTable1.getValueAt(i, 0).equals(item)){
+                    vendaItem.setQuantidade(quant + (int) jTable1.getValueAt(i, 1));
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.removeRow(i);
+                    
+                }
             }
         }
-        model.addRow(new Object[]{estruturaVendas.getItem(),estruturaVendas.getQuantidadeVendida(), estruturaVendas.getPrecoUnit() , estruturaVendas.getPrecoUnit()*estruturaVendas.getQuantidadeVendida()});
-        comboBoxReload(hashEstoque);
+        venda.insert(vendaItem);
+        mod.tableAddVenda(venda, jTable1);
     }
                                            
                                             
@@ -240,7 +240,7 @@ public class AdicionarVendas extends javax.swing.JFrame {
         HashEstoque estoque = this.hashEstoque;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new AdicionarVendas(estoque).setVisible(true);
+            new AdicionarVendas(null,null).setVisible(true);
         });
     }
 

@@ -3,9 +3,9 @@
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/EditarEstoque.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/EstoqueMenu.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/EstruturaFuncionarios.java
-/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/EstruturaVenda.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/ExcluirEstoque.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/HashEstoque.java
+/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/HeapVenda.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/InserirEstoque.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/ListarEstoque.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/ListarVendas.java
@@ -13,6 +13,5 @@
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/MenuAtendente.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/MenuFrentista.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/MenuGerente.java
-/home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/Teste.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/VendasMenu.java
 /home/aliran/Área de trabalho/pasta2/PostoDeCombustivel_Xique_Xique/xiquexique/src/main/java/com/posto/xiquexique/Xiquexique.java

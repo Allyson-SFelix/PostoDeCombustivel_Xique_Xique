@@ -1,5 +1,7 @@
 package com.posto.xiquexique;
 
+import java.util.ArrayList;
+
 
 /**
  * Classe que representa a estrutura de funcionários
@@ -18,7 +20,7 @@ public class EstruturaFuncionarios {
     private EstruturaFuncionarios esquerda;
     private EstruturaFuncionarios direita;
     private int altura;
-
+    private ArrayList<HeapVenda> vendas;
 
 
     /**
@@ -116,8 +118,41 @@ public class EstruturaFuncionarios {
             return 0;
         return novo.getNome().compareTo(root.getNome());
     }
+
+    public ArrayList<HeapVenda> getVendas() {
+        return vendas;
+    }
+
+    public HeapVenda getVenda(int index){
+        return this.vendas.get(index);
+    }
+
+    public void setHeap(int index, HeapVenda venda){ 
+        this.vendas.set(index, venda);
+    }
+
+    public void removeHeap(int index){
+        this.vendas.remove(index);
+    }
+
+    public float getPrecoVenda(int index){
+        return this.vendas.get(index).getValorTotal();
+    }
+
+    public int getQuantidadeVendida(int index){
+        return this.vendas.get(index).getQuantidadeTotal();
+    }
+
     // </editor-fold>
     
+    public void addVenda(HeapVenda venda){
+        if(this.vendas == null){
+            this.vendas = new ArrayList<>();
+        }
+        venda.setId(this.vendas.size());
+        this.vendas.add(venda);
+    }
+
     public void inserirFuncionarios(String nome, String cpf, String senha){
         EstruturaFuncionarios novo = new EstruturaFuncionarios(nome, cpf, senha);
         if(nome.startsWith("f")){

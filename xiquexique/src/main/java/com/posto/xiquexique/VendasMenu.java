@@ -4,6 +4,11 @@
  */
 package com.posto.xiquexique;
 
+import java.lang.reflect.Array;
+
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 /**
  * Classe principal do sistema de vendas
  * Funções:
@@ -18,19 +23,17 @@ public class VendasMenu extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
     Auxiliar mod = new Auxiliar();
+    EstruturaFuncionarios func;
 
     /**
      * Creates new form VendasMenu
      */
-    public VendasMenu(HashEstoque estoque) {
+    public VendasMenu(HashEstoque estoque, EstruturaFuncionarios func) {
         this.hashEstoque = estoque;
         initComponents();
-
-        mod.tableAddEstoque(estoque, jTable1);
+        this.func = func;
+        mod.tableHeapVenda(func, jTable1);
     }
-
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,7 +56,6 @@ public class VendasMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Vendas");
-        setMaximumSize(new java.awt.Dimension(500, 400));
         setMinimumSize(new java.awt.Dimension(500, 400));
 
         Add.setText("Adicionar Venda");
@@ -71,21 +73,27 @@ public class VendasMenu extends javax.swing.JFrame {
         jScrollPane1.setToolTipText("Tabela Vendas");
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nome", "Data", "Hora", "Preço Total"
+                "Id", "Data", "Hora", "Quant. Total", "Preço Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable1.setDropMode(javax.swing.DropMode.INSERT_ROWS);
@@ -150,17 +158,23 @@ public class VendasMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(212, 212, 212)
-                        .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane1)
-                    .addComponent(campoTexto)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(212, 212, 212)
+                            .addComponent(Add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {campoTexto, jScrollPane1});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -170,11 +184,11 @@ public class VendasMenu extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(campoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -187,9 +201,16 @@ public class VendasMenu extends javax.swing.JFrame {
      * 
      */
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
-        AdicionarVendas add = new AdicionarVendas(hashEstoque);
+        
+        AdicionarVendas add = new AdicionarVendas(hashEstoque,func);
         add.setVisible(true);
         
+        add.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                mod.tableHeapVenda(func, jTable1);
+            }
+        });
     }//GEN-LAST:event_AddActionPerformed
 
     /**
@@ -197,8 +218,26 @@ public class VendasMenu extends javax.swing.JFrame {
      * 
      */
     private void VendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendaActionPerformed
-        ListarVendas vizu = new ListarVendas(new EstruturaVenda(null,0f,0));
+        if(campoTexto.getText().equals("Nenhuma")){
+            JOptionPane.showMessageDialog(new JDialog(), "Selecione uma venda para acessar");
+            return;
+        }
+        HeapVenda vendas = func.getVendas().get(Integer.parseInt(campoTexto.getText()));
+        ListarVendas vizu = new ListarVendas(vendas);
         vizu.setVisible(true);
+
+        vizu.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                if(vendas.getSize() == 0){
+                    func.removeHeap(Integer.parseInt(campoTexto.getText()));
+                } else {
+                    func.setHeap(Integer.parseInt(campoTexto.getText()),vendas);
+                }
+                mod.tableHeapVenda(func, jTable1);
+                campoTexto.setText("Nenhuma");
+            }
+        });
     }//GEN-LAST:event_VendaActionPerformed
 
     /**
@@ -247,10 +286,9 @@ public class VendasMenu extends javax.swing.JFrame {
         //</editor-fold>
         
         //</editor-fold>
-        HashEstoque estoque = new HashEstoque();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new VendasMenu(estoque).setVisible(true);
+            new VendasMenu(null,null).setVisible(true);
         });
     }
 
