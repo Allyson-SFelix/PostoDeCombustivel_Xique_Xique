@@ -6,6 +6,9 @@ package com.posto.xiquexique;
 
 import java.lang.reflect.Array;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 /**
  * Classe principal do sistema de vendas
  * Funções:
@@ -215,9 +218,26 @@ public class VendasMenu extends javax.swing.JFrame {
      * 
      */
     private void VendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendaActionPerformed
+        if(campoTexto.getText().equals("Nenhuma")){
+            JOptionPane.showMessageDialog(new JDialog(), "Selecione uma venda para acessar");
+            return;
+        }
         HeapVenda vendas = func.getVendas().get(Integer.parseInt(campoTexto.getText()));
         ListarVendas vizu = new ListarVendas(vendas);
         vizu.setVisible(true);
+
+        vizu.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                if(vendas.getSize() == 0){
+                    func.removeHeap(Integer.parseInt(campoTexto.getText()));
+                } else {
+                    func.setHeap(Integer.parseInt(campoTexto.getText()),vendas);
+                }
+                mod.tableHeapVenda(func, jTable1);
+                campoTexto.setText("Nenhuma");
+            }
+        });
     }//GEN-LAST:event_VendaActionPerformed
 
     /**

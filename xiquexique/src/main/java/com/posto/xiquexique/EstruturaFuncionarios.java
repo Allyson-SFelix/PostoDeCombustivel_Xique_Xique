@@ -127,6 +127,14 @@ public class EstruturaFuncionarios {
         return this.vendas.get(index);
     }
 
+    public void setHeap(int index, HeapVenda venda){ 
+        this.vendas.set(index, venda);
+    }
+
+    public void removeHeap(int index){
+        this.vendas.remove(index);
+    }
+
     public float getPrecoVenda(int index){
         return this.vendas.get(index).getValorTotal();
     }

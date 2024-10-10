@@ -147,6 +147,11 @@ public class ListarVendas extends javax.swing.JFrame {
     private void RemoverItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverItemActionPerformed
         venda.remove();
         mod.tableAddVenda(venda, tabelaVenda);
+        if(venda.getSize() > 0){
+            RemoverItem.setText(venda.getHeap()[0].getItem());
+        }else{
+            RemoverItem.setText("Nenhum");
+        }
     }//GEN-LAST:event_RemoverItemActionPerformed
  
     

@@ -172,6 +172,10 @@ public class AdicionarVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxEstoqueActionPerformed
 
     private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
+        if(venda.getSize() == 0){
+            JOptionPane.showMessageDialog(null, "Nenhuma venda adicionada");
+            return;
+        }
         funcionario.addVenda(venda);
         this.dispose();
     }//GEN-LAST:event_btnConcluirActionPerformed
