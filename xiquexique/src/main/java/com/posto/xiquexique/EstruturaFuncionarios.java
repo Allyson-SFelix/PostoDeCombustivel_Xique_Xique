@@ -338,6 +338,18 @@ public class EstruturaFuncionarios {
 
     }
 
+    public boolean buscarCPF(String Cpf){
+        if(this.cpf.equals(Cpf)){
+            return true;
+        } else if(this.esquerda != null){
+            return this.esquerda.buscarCPF(Cpf);
+        } else if(this.direita != null){
+            return this.direita.buscarCPF(Cpf);
+        } else {
+            return false;
+        }
+    }
+
     private EstruturaFuncionarios buscar(String nome, boolean b){
         if(this.nome.equals(nome)){
             return this;

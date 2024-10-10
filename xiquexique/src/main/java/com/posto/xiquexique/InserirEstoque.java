@@ -242,6 +242,10 @@ public class InserirEstoque extends javax.swing.JFrame {
             campoAux.setText("Preencha os campos corretamente");
             return;
         }
+        if(hashEstoque.buscarItem(campoNome.getText())!=null){
+            campoAux.setText("Item já existe no estoque");
+            return;
+        }
         campoPreco.setText(campoPreco.getText().replace(",", ".")); // Substitui a virgula por ponto
         String nome = campoNome.getText(); // Pega o nome do item
         float preco = Float.parseFloat(campoPreco.getText()); // Pega o preço do item
