@@ -94,6 +94,10 @@ public final class HashEstoque{
     private final EstruturaEstoque[] tabela;
     private final int tamanho = 257;
 
+    /**
+     * Retorna o tamanho da tabela
+     * @return tamanho da tabela
+     */
     public int getTamanho(){
         return this.tamanho;
     }
@@ -197,7 +201,7 @@ public final class HashEstoque{
                 return hash;
             }else{
                 int i = 1;
-                while(tabela[hash+i]!=null){
+                while(tabela[hash+i]!=null||hash+i<tamanho){
                     if(tabela[hash+i].getItem().equals(item)){
                         return hash+i;
                     }

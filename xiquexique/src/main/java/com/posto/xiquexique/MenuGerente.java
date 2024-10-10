@@ -4,7 +4,6 @@
  */
 package com.posto.xiquexique;
 
-import java.lang.management.ThreadInfo;
 import java.text.ParseException;
 
 /**
@@ -452,35 +451,62 @@ public class MenuGerente extends javax.swing.JFrame {
         String campoNomeAdd = textFieldNome.getText();
         String campoCpfAdd = textFieldCpf.getText();
         String campoSenhaAdd = new String(passAddFunc.getPassword());
+
+        
+        if(this.funcionarios.buscar(campoNomeAdd)!=null){
+            labelInfos.setText("Nome de usuário já existe!");
+            return;
+        }
         if(campoNomeAdd.equals("")){
             labelInfos.setText("Digite o nome!");
-        } else if(campoCpfAdd.equals("")){
-            labelInfos.setText("Digite o CPF!");
-        } else if(campoSenhaAdd.equals("")){
-            labelInfos.setText("Digite a senha!");
-        } else if(!radioFrentista.isSelected() && !radioVendedor.isSelected()){
-            labelInfos.setText("Selecione o tipo de funcionário!");
-        } else {
-            textFieldNome.setText(campoNomeAdd.toLowerCase());
-            //adicionar funcionário
-            if (radioFrentista.isSelected()) {
-                campoNomeAdd = "f" + campoNomeAdd;
-                this.funcionarios.inserirFuncionarios(campoNomeAdd, campoCpfAdd, campoSenhaAdd);
-            } else {
-                campoNomeAdd = "v" + campoNomeAdd;
-                this.funcionarios.inserirFuncionarios(campoNomeAdd, campoCpfAdd, campoSenhaAdd);
-            }
-
-            labelInfos.setText("Funcionário adicionado com sucesso!");
+            return;
+        }
+        if(!campoNomeAdd.matches("[\\p{L}]+")){
             javax.swing.JOptionPane.showConfirmDialog(
                 null, 
-                "Seu nome de usuario é " + campoNomeAdd, 
+                "O nome de usuário deve conter apenas letras", 
                 "Aviso",
-                javax.swing.JOptionPane.OK_CANCEL_OPTION, 
+                javax.swing.JOptionPane.CANCEL_OPTION, 
                 javax.swing.JOptionPane.WARNING_MESSAGE
-            );
-            addFuncFrame.setVisible(false);
+                );
+            return;
         }
+        if(campoSenhaAdd.equals("")){
+            labelInfos.setText("Digite a senha!");
+            return;
+        }
+        if(campoCpfAdd.equals("")){
+            labelInfos.setText("Digite o CPF!");
+            return;
+        } 
+        if(funcionarios.buscarCPF(campoCpfAdd)){
+            labelInfos.setText("CPF já cadastrado!");
+            return;
+        }
+        if(!radioFrentista.isSelected() && !radioVendedor.isSelected()){
+            labelInfos.setText("Selecione o tipo de funcionário!");
+            return;
+        }
+        textFieldNome.setText(campoNomeAdd.toLowerCase());
+        //adicionar funcionário
+        if (radioFrentista.isSelected()) {
+            campoNomeAdd = "f" + campoNomeAdd;
+            this.funcionarios.inserirFuncionarios(campoNomeAdd, campoCpfAdd, campoSenhaAdd);
+        } else {
+            campoNomeAdd = "v" + campoNomeAdd;
+            this.funcionarios.inserirFuncionarios(campoNomeAdd, campoCpfAdd, campoSenhaAdd);
+        }
+
+        labelInfos.setText("Funcionário adicionado com sucesso!");
+        javax.swing.JOptionPane.showConfirmDialog(
+            null, 
+            "Seu nome de usuario é " + campoNomeAdd, 
+            "Aviso",
+            javax.swing.JOptionPane.OK_OPTION, 
+            javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        addFuncFrame.setVisible(false);
+        
         
     }//GEN-LAST:event_btnConfirmarAddFuncActionPerformed
 

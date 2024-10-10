@@ -51,6 +51,13 @@ public class Auxiliar{
         }
     }
 
+    /**
+     * Insere os itens da venda na tabela,
+     * caso a tabela tem 4 colunas
+     * exibirá o item, a quantidade, o preço unitário e o valor total
+     * caso a tabela tenha 3 colunas
+     * exibirá o item, a quantidade e o preço unitário
+     */
     public void tableAddVenda(HeapVenda venda, javax.swing.JTable tabelaVenda){
         tableClear(tabelaVenda);
         for(int i = 0; i < venda.getSize(); i++){
@@ -59,6 +66,10 @@ public class Auxiliar{
         }
     }
 
+    /**
+     * Insere os itens da venda na tabela,
+     * exibe o id, a data, a hora, a quantidade total e o valor total
+     */
     public void tableHeapVenda(EstruturaFuncionarios func, javax.swing.JTable tabelaVenda){
         tableClear(tabelaVenda);
         ArrayList<HeapVenda> vendas = func.getVendas();

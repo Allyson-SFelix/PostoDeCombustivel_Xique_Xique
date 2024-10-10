@@ -3,6 +3,11 @@ package com.posto.xiquexique;
 
 import java.time.LocalDateTime;
 
+/**
+ * Classe que implementa um heap para vendas
+ * 
+ * @author aliran
+ */
 public class HeapVenda{
 
     private final EstruturaVenda[] heap;
@@ -10,16 +15,29 @@ public class HeapVenda{
     private final LocalDateTime creationTime;
     private int id;
 
+    /**
+     * Construtor da classe HeapVenda
+     */
     public HeapVenda(HashEstoque estoque){
         heap = new EstruturaVenda[estoque.getEspacosPreenchidos()];
         size = 0;
         creationTime = LocalDateTime.now();
     }
 
+    /**
+     * Retorna o horario e data de criação da venda
+     */
     public LocalDateTime getCreationTime() {
         return creationTime;
     }
 
+    /**
+     * Estrutura de venda
+     * 
+     * Subclasse de HeapVenda
+     * 
+     * Representa um item vendido
+     */
     public class EstruturaVenda{
         private String item;
         private int quantidade;
@@ -70,6 +88,7 @@ public class HeapVenda{
 
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
     public int getSize(){
         return size;
     }
@@ -106,6 +125,14 @@ public class HeapVenda{
         return heap[index];
     }
 
+    // </editor-fold>
+
+    /**
+     * Retorna o index do item na heap
+     * 
+     * @param index
+     * @return index do item ou -1 caso não encontre
+     */
     public int search(String item){
         for(int i = 0; i < size; i++){
             if(heap[i].getItem().equals(item)){
@@ -115,12 +142,22 @@ public class HeapVenda{
         return -1;
     }
 
+    /**
+     * Insere um item na heap
+     * 
+     * @param item
+     */
     public void insert(EstruturaVenda item){
         heap[size] = item;
         heapifyUp(size);
         size++;
     }
 
+    /**
+     * Remove um item da heap
+     * 
+     * @return item removido
+     */
     public EstruturaVenda remove(){
         EstruturaVenda item = heap[0];
         size--;
@@ -129,6 +166,9 @@ public class HeapVenda{
         return item;
     }
 
+    /**
+     * Organiza a heap
+     */
     private void heapifyUp(int index){
         int parent = (index)/2;
         if(index > 0 && heap[index].valorTotal() > heap[parent].valorTotal()){
@@ -137,6 +177,9 @@ public class HeapVenda{
         }
     }
 
+    /**
+     * Organiza a heap
+     */
     private void heapifyDown(int index){
         int left = 2*index;
         int right = 2*index+1;
@@ -153,6 +196,9 @@ public class HeapVenda{
         }
     }
 
+    /**
+     * Troca dois itens da heap
+     */
     private void swap(int i, int j){
         EstruturaVenda temp = heap[i];
         heap[i] = heap[j];

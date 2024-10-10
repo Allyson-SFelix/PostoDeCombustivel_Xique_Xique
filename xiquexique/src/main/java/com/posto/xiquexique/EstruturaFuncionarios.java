@@ -185,25 +185,20 @@ public class EstruturaFuncionarios {
 
         int balance = getBalance(root);
 
-        // Caso de Desbalanceamento Esquerda-Esquerda
         if (balance > 1 && getBalance(root.esquerda) >= 0)
             return rotacaoDireita(root);
 
-        // Caso de Desbalanceamento Esquerda-Direita
         if (balance > 1 && getBalance(root.esquerda) < 0) {
             return rotacaoDuplaDireita(root);
         }
 
-        // Caso de Desbalanceamento Direita-Direita
         if (balance < -1 && getBalance(root.direita) <= 0)
             return rotacaoEsquerda(root);
 
-        // Caso de Desbalanceamento Direita-Esquerda
         if (balance < -1 && getBalance(root.direita) > 0) {
             return rotacaoDuplaEsquerda(root);
         }
 
-        // Caso de árvore balanceada
         return root;
     }
 
@@ -262,7 +257,6 @@ public class EstruturaFuncionarios {
      * @return Árvore sem o funcionário excluído
      */
     public EstruturaFuncionarios excluirNo(EstruturaFuncionarios root, EstruturaFuncionarios deletando) {
-        // Passo 1: Remoção normal de uma árvore binária de busca
         if (root == null)
             return root;
         
@@ -272,7 +266,6 @@ public class EstruturaFuncionarios {
         else if (getOrdem(root, deletando) > 0)
             root.direita = excluirNo(root.direita, deletando);
         else {
-            // Nó com apenas um filho ou nenhum
             if ((root.esquerda == null) || (root.direita == null)) {
                 EstruturaFuncionarios temp = null;
                 if (temp == root.esquerda)
@@ -280,24 +273,19 @@ public class EstruturaFuncionarios {
                 else
                     temp = root.esquerda;
 
-                // Caso de nó sem filhos
                 if (temp == null) {
                     root = null;
-                } else // Caso de um único filho
+                } else 
                     root = temp;
             } else {
-                // Nó com dois filhos: obter o sucessor (menor na subárvore direita)
                 EstruturaFuncionarios temp = getMinValueNode(root.direita);
 
-                // Copiar o sucessor para o nó atual
                 copiarNo(temp, root);
 
-                // Remover o sucessor
                 root.direita = excluirNo(root.direita, temp);
             }
         }
 
-        // Se a árvore tinha apenas um nó
         if (root == null)
             return root;
 
@@ -338,6 +326,31 @@ public class EstruturaFuncionarios {
 
     }
 
+    /**
+     * Busca se existe um CPF na arvore
+     * 
+     * @param Cpf CPF do funcionário a ser buscado
+     * @return caso exista o CPF retorna true, caso contrário retorna false
+     */
+    public boolean buscarCPF(String Cpf){
+        if(this.cpf.equals(Cpf)){
+            return true;
+        } else if(this.esquerda != null){
+            return this.esquerda.buscarCPF(Cpf);
+        } else if(this.direita != null){
+            return this.direita.buscarCPF(Cpf);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Busca um funcionário na árvore
+     * 
+     * @param nome Nome do funcionário a ser buscado
+     * @param b Se é frentista ou não
+     * @return Funcionário buscado
+     */
     private EstruturaFuncionarios buscar(String nome, boolean b){
         if(this.nome.equals(nome)){
             return this;
@@ -357,7 +370,11 @@ public class EstruturaFuncionarios {
     }
 
     // <editor-fold defaultstate="collapsed" desc="Rotações">
-
+    /**
+     * Retorna a altura de um nó
+     * @param N Nó a ser verificado
+     * @return Altura do nó
+     */
     private int altura(EstruturaFuncionarios N) {
         if (N == null) 
             return 0;
@@ -373,15 +390,12 @@ public class EstruturaFuncionarios {
         EstruturaFuncionarios x = y.esquerda;
         EstruturaFuncionarios T2 = x.direita;
 
-        // Realizando a rotação
         x.direita = y;
         y.esquerda = T2;
 
-        // Atualizando as alturas
         y.altura = Math.max(altura(y.esquerda), altura(y.direita)) + 1;
         x.altura = Math.max(altura(x.esquerda), altura(x.direita)) + 1;
 
-        // Retornando a nova raiz
         return x;
     }
 
@@ -394,15 +408,12 @@ public class EstruturaFuncionarios {
         EstruturaFuncionarios y = x.direita;
         EstruturaFuncionarios T2 = y.esquerda;
 
-        // Realizando a rotação
         y.esquerda = x;
         x.direita = T2;
 
-        // Atualizando as alturas
         x.altura = Math.max(altura(x.esquerda), altura(x.direita)) + 1;
         y.altura = Math.max(altura(y.esquerda), altura(y.direita)) + 1;
 
-        // Retornando a nova raiz
         return y;
     }
 
