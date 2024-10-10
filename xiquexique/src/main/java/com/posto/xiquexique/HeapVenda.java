@@ -129,7 +129,7 @@ public class HeapVenda{
         return item;
     }
 
-    public void heapifyUp(int index){
+    private void heapifyUp(int index){
         int parent = (index)/2;
         if(index > 0 && heap[index].valorTotal() > heap[parent].valorTotal()){
             swap(index, parent);
@@ -137,7 +137,7 @@ public class HeapVenda{
         }
     }
 
-    public void heapifyDown(int index){
+    private void heapifyDown(int index){
         int left = 2*index;
         int right = 2*index+1;
         int largest = index;
@@ -153,7 +153,7 @@ public class HeapVenda{
         }
     }
 
-    public void swap(int i, int j){
+    private void swap(int i, int j){
         EstruturaVenda temp = heap[i];
         heap[i] = heap[j];
         heap[j] = temp;

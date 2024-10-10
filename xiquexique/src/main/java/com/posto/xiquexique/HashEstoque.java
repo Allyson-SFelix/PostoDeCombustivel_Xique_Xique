@@ -121,6 +121,12 @@ public final class HashEstoque{
         return this.tabela;
     }
 
+    /**
+     * Retorna a quantidade de espaços preenchidos na tabela
+     * ,
+     * @return a quantidade de espaços preenchidos
+     * 
+     */
     public int getEspacosPreenchidos(){
         int count = 0;
         HashEstoque.EstruturaEstoque[] aux = this.getTabela();
@@ -139,24 +145,43 @@ public final class HashEstoque{
      * @param precoUnit o preço unitário do item
      * @param quantidade a quantidade do item
      */
-    public void inserir(String item, float precoUnit, int quantidade){
-        int hash = codigoHashGen(item);
+    public void inserir(EstruturaEstoque item){
+        int hash = codigoHashGen(item.getItem());
 
         if(tabela[hash]==null){
-            tabela[hash] = new EstruturaEstoque(item, precoUnit, quantidade);
+            tabela[hash] = item;
         }else{
             int i = 1;
             while(tabela[hash+i]!=null && hash+i<tamanho){
                 i++;
             }
             if(hash+i<tamanho){
-                tabela[hash+i] = new EstruturaEstoque(item, precoUnit, quantidade);
+                tabela[hash+i] = item;
                 return;
             }
             System.out.println("Tabela cheia");
         }
     }
 
+    /**
+     * Reinsere um item na tabela 
+     * a partir de uma venda cancelada
+     * 
+     * é feito para evitar a duplicação de itens
+     * 
+     * @param item
+     * @param precoUnit
+     * @param quantidade
+     */
+    public void inserir(String item, float precoUnit, int quantidade){
+        int busca = buscar(item);
+        EstruturaEstoque itemEstoque = new EstruturaEstoque(item, precoUnit, quantidade);
+        if(busca!=-1){
+            tabela[busca].setQuantidade(tabela[busca].getQuantidade()+quantidade);
+        }else{
+            inserir(itemEstoque);
+        }
+    }
 
     /**
      * Busca um item na tabela e retorna o hash

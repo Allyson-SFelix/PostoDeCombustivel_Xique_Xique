@@ -86,8 +86,7 @@ public class Auxiliar{
      * @param tabelaEstoque
     */
     private void tableClear(javax.swing.JTable tabelaEstoque) {
-        DefaultTableModel model = (DefaultTableModel) tabelaEstoque.getModel();
-        model.setRowCount(0);
+        ((DefaultTableModel) tabelaEstoque.getModel()).setRowCount(0);
     }
     
     /**

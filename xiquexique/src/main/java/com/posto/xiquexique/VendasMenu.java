@@ -223,7 +223,7 @@ public class VendasMenu extends javax.swing.JFrame {
             return;
         }
         HeapVenda vendas = func.getVendas().get(Integer.parseInt(campoTexto.getText()));
-        ListarVendas vizu = new ListarVendas(vendas);
+        ListarVendas vizu = new ListarVendas(vendas, hashEstoque);
         vizu.setVisible(true);
 
         vizu.addWindowListener(new java.awt.event.WindowAdapter() {

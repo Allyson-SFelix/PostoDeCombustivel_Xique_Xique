@@ -13,12 +13,14 @@ public class ListarVendas extends javax.swing.JFrame {
 
     HeapVenda venda;
     Auxiliar mod = new Auxiliar();
+    HashEstoque hashEstoque;
  
     /**
      * Creates new form ListarVendas
      */
-    public ListarVendas(HeapVenda venda) {
+    public ListarVendas(HeapVenda venda,HashEstoque estoque) {
         this.venda = venda;
+        this.hashEstoque = estoque;
         initComponents();
         mod.tableAddVenda(venda, tabelaVenda);
     }
@@ -145,6 +147,8 @@ public class ListarVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaVendaMouseClicked
 
     private void RemoverItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverItemActionPerformed
+        HeapVenda.EstruturaVenda vendaRemovida = venda.getHeap(0);
+        hashEstoque.inserir(vendaRemovida.getItem(), vendaRemovida.getPrecoUnit(), vendaRemovida.getQuantidade());
         venda.remove();
         mod.tableAddVenda(venda, tabelaVenda);
         if(venda.getSize() > 0){
@@ -187,7 +191,7 @@ public class ListarVendas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListarVendas(null).setVisible(true);
+                new ListarVendas(null,null).setVisible(true);
             }
         });
     }

@@ -173,7 +173,7 @@ public class AdicionarVendas extends javax.swing.JFrame {
 
     private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
         if(venda.getSize() == 0){
-            JOptionPane.showMessageDialog(null, "Nenhuma venda adicionada");
+            JOptionPane.showMessageDialog(null, "Nenhuma item selecionado");
             return;
         }
         funcionario.addVenda(venda);
@@ -192,27 +192,34 @@ public class AdicionarVendas extends javax.swing.JFrame {
      * Adiciona um item a tabela de vendas
      * via comboBoxEstoque e spinnerQuantidade
      */
-    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        int quant = (int) spinnerQuantidade.getValue();
-        String item = comboBoxEstoque.getSelectedItem().toString();
-        HashEstoque.EstruturaEstoque estoqueItem = hashEstoque.buscarItem(item);
-        if(hashEstoque.retirarQuant(item, quant) == -1){
-            JOptionPane.showMessageDialog(null, "Quantidade insuficiente ou Item não encontrado");
-            return;
-        }
-        HeapVenda.EstruturaVenda vendaItem = venda.new EstruturaVenda(item, estoqueItem.getPrecoUnit(), quant);
-        if(venda.search(item) != -1){
-            for(int i = 0; i < jTable1.getRowCount(); i++){
-                if(jTable1.getValueAt(i, 0).equals(item)){
-                    vendaItem.setQuantidade(quant + (int) jTable1.getValueAt(i, 1));
-                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                    model.removeRow(i);
-                    
-                }
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {     
+        try {
+                                                
+            int quant = (int) spinnerQuantidade.getValue();
+            String item = comboBoxEstoque.getSelectedItem().toString();
+            HashEstoque.EstruturaEstoque estoqueItem = hashEstoque.buscarItem(item);
+            if(hashEstoque.retirarQuant(item, quant) == -1){
+                JOptionPane.showMessageDialog(null, "Quantidade insuficiente ou Item não encontrado");
+                return;
             }
+            HeapVenda.EstruturaVenda vendaItem = venda.new EstruturaVenda(item, estoqueItem.getPrecoUnit(), quant);
+            int busca = venda.search(item);
+            if(busca != -1){
+                for(int i = 0; i < jTable1.getRowCount(); i++){
+                    if(jTable1.getValueAt(i, 0).equals(item)){
+                        venda.getHeap(busca).setQuantidade(quant + (int) jTable1.getValueAt(i, 1));
+                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                        model.removeRow(i);
+                    }
+                }
+            } else{
+                venda.insert(vendaItem);
+            }
+            mod.tableAddVenda(venda, jTable1);
+            mod.comboBoxReload(hashEstoque, comboBoxEstoque);
+        } catch (NullPointerException | IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao adicionar item: " + e.getMessage());
         }
-        venda.insert(vendaItem);
-        mod.tableAddVenda(venda, jTable1);
     }
                                            
                                             
