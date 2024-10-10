@@ -19,15 +19,17 @@ public class Auxiliar{
 
     /**
      * Insere os itens do estoque na tabela,
-     * exibindo o preço total
+     * caso a tabela tem 4 colunas
+     * exibirá o item, a quantidade, o preço unitário e o valor total
+     * caso a tabela tenha 3 colunas
+     * exibirá o item, a quantidade e o preço unitário
      * 
      * Limpa a tabela antes de inserir os itens
      * 
      * @param estoque
      * @param tabelaEstoque
-     * @param precoTotal Serve para definir se o preço total será exibido ou não
      */
-    public void tableAddEstoque(HashEstoque estoque, javax.swing.JTable tabelaEstoque, boolean precoTotal){
+    public void tableAddEstoque(HashEstoque estoque, javax.swing.JTable tabelaEstoque){
         tableClear(tabelaEstoque);
 
         HashEstoque.EstruturaEstoque[] estoqueArrayAux = new HashEstoque.EstruturaEstoque[estoque.getTamanho()];
@@ -44,25 +46,9 @@ public class Auxiliar{
         for (int i = 0; i < auxIndex; i++) {
             HashEstoque.EstruturaEstoque estoqueItem = estoqueArray[i];
             if (estoqueItem != null) {
-                if(precoTotal)
-                    ((DefaultTableModel) tabelaEstoque.getModel()).addRow(new Object[]{estoqueItem.getItem(), estoqueItem.getQuantidade(), estoqueItem.getPrecoUnit(), estoqueItem.getQuantidade() * estoqueItem.getPrecoUnit()});
-                else
-                    ((DefaultTableModel) tabelaEstoque.getModel()).addRow(new Object[]{estoqueItem.getItem(), estoqueItem.getQuantidade(), estoqueItem.getPrecoUnit(), estoqueItem.getQuantidade() * estoqueItem.getPrecoUnit()});
+                ((DefaultTableModel) tabelaEstoque.getModel()).addRow(new Object[]{estoqueItem.getItem(), estoqueItem.getQuantidade(), estoqueItem.getPrecoUnit(), estoqueItem.getQuantidade() * estoqueItem.getPrecoUnit()});
             }
         }
-    }
-
-    /**
-     * Insere os itens do estoque na tabela,
-     * sem exibir o preço total
-     * 
-     * Limpa a tabela antes de inserir os itens
-     * 
-     * @param estoque
-     * @param tabelaEstoque
-     */
-    public void tableAddEstoque(HashEstoque estoque, javax.swing.JTable tabelaEstoque){
-        tableAddEstoque(estoque, tabelaEstoque, false);
     }
 
     public void tableAddVenda(HeapVenda venda, javax.swing.JTable tabelaVenda){

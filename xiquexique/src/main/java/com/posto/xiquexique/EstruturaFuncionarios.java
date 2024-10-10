@@ -141,7 +141,7 @@ public class EstruturaFuncionarios {
         if(this.vendas == null){
             this.vendas = new ArrayList<>();
         }
-        venda.setId(this.vendas.size()+1);
+        venda.setId(this.vendas.size());
         this.vendas.add(venda);
     }
 
