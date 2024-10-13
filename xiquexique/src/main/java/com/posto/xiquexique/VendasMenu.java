@@ -4,10 +4,6 @@
  */
 package com.posto.xiquexique;
 
-import java.lang.reflect.Array;
-
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 
 /**
  * Classe principal do sistema de vendas
@@ -98,7 +94,7 @@ public class VendasMenu extends javax.swing.JFrame {
         });
         jTable1.setDropMode(javax.swing.DropMode.INSERT_ROWS);
         jTable1.setName(""); // NOI18N
-        jTable1.setPreferredSize(new java.awt.Dimension(200, 80));
+        jTable1.setPreferredSize(new java.awt.Dimension(200, 200));
         jTable1.setShowGrid(true);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -219,10 +215,16 @@ public class VendasMenu extends javax.swing.JFrame {
      */
     private void VendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VendaActionPerformed
         if(campoTexto.getText().equals("Nenhuma")){
-            JOptionPane.showMessageDialog(new JDialog(), "Selecione uma venda para acessar");
+            javax.swing.JOptionPane.showMessageDialog(new javax.swing.JDialog(), "Selecione uma venda para acessar");
             return;
         }
-        HeapVenda vendas = func.getVendas().get(Integer.parseInt(campoTexto.getText()));
+        int id = Integer.parseInt(campoTexto.getText());
+        HeapVenda vendas = func.getVenda(id);
+        if(vendas == null){
+            javax.swing.JOptionPane.showMessageDialog(new javax.swing.JDialog(), "Venda não encontrada");
+            return;
+        }
+
         ListarVendas vizu = new ListarVendas(vendas, hashEstoque);
         vizu.setVisible(true);
 
@@ -230,9 +232,9 @@ public class VendasMenu extends javax.swing.JFrame {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 if(vendas.getSize() == 0){
-                    func.removeHeap(Integer.parseInt(campoTexto.getText()));
+                    func.removeHeap(id);
                 } else {
-                    func.setHeap(Integer.parseInt(campoTexto.getText()),vendas);
+                    func.setHeap(id,vendas);
                 }
                 mod.tableHeapVenda(func, jTable1);
                 campoTexto.setText("Nenhuma");

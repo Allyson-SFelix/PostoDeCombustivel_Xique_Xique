@@ -116,7 +116,7 @@
               <Value id="INSERT_ROWS"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 80]"/>
+              <Dimension value="[200, 200]"/>
             </Property>
             <Property name="showGrid" type="boolean" value="false"/>
             <Property name="showHorizontalLines" type="boolean" value="true"/>

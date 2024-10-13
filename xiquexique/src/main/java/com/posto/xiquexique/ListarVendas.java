@@ -152,7 +152,7 @@ public class ListarVendas extends javax.swing.JFrame {
         venda.remove();
         mod.tableAddVenda(venda, tabelaVenda);
         if(venda.getSize() > 0){
-            RemoverItem.setText(venda.getHeap()[0].getItem());
+            RemoverItem.setText(venda.getHeap(0).getItem());
         }else{
             RemoverItem.setText("Nenhum");
         }

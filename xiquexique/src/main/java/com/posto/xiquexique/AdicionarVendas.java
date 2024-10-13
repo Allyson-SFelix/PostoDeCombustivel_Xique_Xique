@@ -92,7 +92,7 @@ public class AdicionarVendas extends javax.swing.JFrame {
             }
         });
         jTable1.setDropMode(javax.swing.DropMode.INSERT_ROWS);
-        jTable1.setPreferredSize(new java.awt.Dimension(200, 80));
+        jTable1.setPreferredSize(new java.awt.Dimension(200, 200));
         jTable1.setShowGrid(false);
         jTable1.setShowHorizontalLines(true);
         jScrollPane1.setViewportView(jTable1);
@@ -173,7 +173,7 @@ public class AdicionarVendas extends javax.swing.JFrame {
 
     private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
         if(venda.getSize() == 0){
-            JOptionPane.showMessageDialog(null, "Nenhuma item selecionado");
+            JOptionPane.showMessageDialog(null, "Nenhum item selecionado");
             return;
         }
         funcionario.addVenda(venda);

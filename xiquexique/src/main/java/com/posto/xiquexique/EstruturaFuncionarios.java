@@ -124,7 +124,12 @@ public class EstruturaFuncionarios {
     }
 
     public HeapVenda getVenda(int index){
-        return this.vendas.get(index);
+        for (int i = 0; i < this.vendas.size(); i++) {
+            if (this.vendas.get(i).getId() == index) {
+                return this.vendas.get(i);
+            }
+        }
+        return null;
     }
 
     public void setHeap(int index, HeapVenda venda){ 
@@ -132,7 +137,12 @@ public class EstruturaFuncionarios {
     }
 
     public void removeHeap(int index){
-        this.vendas.remove(index);
+        for (int i = 0; i < this.vendas.size(); i++) {
+            if (this.vendas.get(i).getId() == index) {
+                this.vendas.remove(i);
+                return;
+            }
+        }
     }
 
     public float getPrecoVenda(int index){
@@ -145,6 +155,10 @@ public class EstruturaFuncionarios {
 
     // </editor-fold>
     
+    public int compararVendas(HeapVenda venda, int index){
+        return this.vendas.get(index).getCreationTime().compareTo(venda.getCreationTime());
+    }
+
     public void addVenda(HeapVenda venda){
         if(this.vendas == null){
             this.vendas = new ArrayList<>();
