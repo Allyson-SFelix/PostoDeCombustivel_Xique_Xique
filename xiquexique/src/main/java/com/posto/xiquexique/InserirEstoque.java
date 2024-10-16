@@ -242,6 +242,7 @@ public class InserirEstoque extends javax.swing.JFrame {
             campoAux.setText("Preencha os campos corretamente");
             return;
         }
+        campoNome.setText(campoNome.getText().substring(0, 1).toUpperCase() + campoNome.getText().substring(1));
         if(hashEstoque.buscarItem(campoNome.getText())!=null){
             campoAux.setText("Item já existe no estoque");
             return;
@@ -274,7 +275,7 @@ public class InserirEstoque extends javax.swing.JFrame {
         String nome = campoNome.getText();
         float preco = Float.parseFloat(campoPreco.getText());
         int quantidadeLocal = (int) quantSpinner.getValue();
-        if(!campoAux.getText().equals("")){
+        if(!campoAux.getText().equals("") && campoAux.getText().equals("Nome: " + nome + " Preço: " + preco + " Quantidade: " + quantidadeLocal)){
             this.hashEstoque.inserir(nome, preco, quantidadeLocal);
             this.dispose();
         }

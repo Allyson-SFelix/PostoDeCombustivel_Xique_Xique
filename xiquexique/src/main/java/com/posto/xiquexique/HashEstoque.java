@@ -201,7 +201,7 @@ public final class HashEstoque{
                 return hash;
             }else{
                 int i = 1;
-                while(tabela[hash+i]!=null||hash+i<tamanho){
+                while(tabela[hash+i]!=null && hash+i<tamanho){
                     if(tabela[hash+i].getItem().equals(item)){
                         return hash+i;
                     }
