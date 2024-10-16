@@ -248,9 +248,12 @@ public class InserirEstoque extends javax.swing.JFrame {
             return;
         }
         
-        campoPreco.setText(campoPreco.getText().replace(",", ".")); // Substitui a virgula por ponto
+        String precoTemp = campoPreco.getText().replace(",", "l");
+        precoTemp = precoTemp.replace(".", "j");
+        precoTemp = precoTemp.replace("l", ".");
+        precoTemp = precoTemp.replace("j", "");
         String nome = campoNome.getText(); // Pega o nome do item
-        float preco = Float.parseFloat(campoPreco.getText()); // Pega o preço do item
+        float preco = Float.parseFloat(precoTemp); // Pega o preço do item
         if(preco<=0){
             campoAux.setText("Preço inválido");
             return;
