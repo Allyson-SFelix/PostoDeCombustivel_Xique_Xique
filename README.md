@@ -42,19 +42,19 @@ Este projeto tem como objetivo auxiliar o gestor na resolução de problemas rel
 
 2. Navegue até o diretório do projeto:
     ```bash
-    cd xiquexique/src/main/java/com/posto/xiquexique/Xiquexique.java
+    cd xiquexique
     ```
 
 3. Execute este arquivo:
 
    1º Etapa (Compilar o arquivo):
     ```bash
-    javac Xiquexique.java
+    mvn -B package --file pom.xml
     ```
 
     2º Etapa (Executar o arquivo):
     ```bash
-    java Xiquexique
+    java -jar xiquexique-{version}.jar
     ```
 
 ## Como Usar
