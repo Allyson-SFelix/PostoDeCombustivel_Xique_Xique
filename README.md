@@ -23,13 +23,15 @@ Este projeto tem como objetivo auxiliar o gestor na resolução de problemas rel
 
     **OBS**: Este sistema foi projetado levando em consideração que o gerente tem o maior poder de controle da empresa, tendo acesso a todos os menus desenvolvidos.
 
-## Instalação
+### Pré-requisitos para Executar
 
-### Pré-requisitos para Executar:
 1. **Java Runtime Environment (JRE)**:
-    - Você pode baixar a versão mais recente do JRE no site oficial da Oracle: [Oracle JRE Downloads](https://www.oracle.com/java/technologies/downloads/#java8).
+   - Você pode baixar a versão mais recente do JRE no site oficial da Oracle: [Oracle JRE Downloads](https://www.oracle.com/java/technologies/javase-jre8-downloads.html).
+
 2. **Maven**:
-    - 
+   - Certifique-se de que o Maven esteja instalado. Você pode baixar a versão mais recente do Maven no site oficial: [Maven Downloads](https://maven.apache.org/download.cgi).
+   - Após a instalação, verifique se o Maven está configurado corretamente executando o comando `mvn -v` no terminal.
+
 
 ### Passos para Instalar:
 
