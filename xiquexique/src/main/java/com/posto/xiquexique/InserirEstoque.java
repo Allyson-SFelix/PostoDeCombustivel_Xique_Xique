@@ -123,7 +123,12 @@ public class InserirEstoque extends javax.swing.JFrame {
             }
         });
 
-        campoPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
+        campoPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        campoPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoPrecoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Preço:");
 
@@ -275,14 +280,22 @@ public class InserirEstoque extends javax.swing.JFrame {
      */
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         
-        String nome = campoNome.getText();
-        float preco = Float.parseFloat(campoPreco.getText());
+        String precoTemp = campoPreco.getText().replace(",", "l");
+        precoTemp = precoTemp.replace(".", "j");
+        precoTemp = precoTemp.replace("l", ".");
+        precoTemp = precoTemp.replace("j", "");
+        String nome = campoNome.getText(); // Pega o nome do item
+        float preco = Float.parseFloat(precoTemp); // Pega o preço do item
         int quantidadeLocal = (int) quantSpinner.getValue();
         if(!campoAux.getText().equals("") && campoAux.getText().equals("Nome: " + nome + " Preço: " + preco + " Quantidade: " + quantidadeLocal)){
             this.hashEstoque.inserir(nome, preco, quantidadeLocal);
             this.dispose();
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void campoPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPrecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoPrecoActionPerformed
 
     /**
      * @param args the command line arguments
