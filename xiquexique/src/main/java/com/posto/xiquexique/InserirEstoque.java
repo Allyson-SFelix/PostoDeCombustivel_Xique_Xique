@@ -45,9 +45,10 @@ public class InserirEstoque extends javax.swing.JFrame {
         btnConfirmar = new javax.swing.JButton();
         quantSpinner = new javax.swing.JSpinner();
         campoNome = new javax.swing.JTextField();
-        campoPreco = new javax.swing.JTextField();
         quantidade = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
+        campoPreco = new javax.swing.JFormattedTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Estoque");
@@ -107,18 +108,6 @@ public class InserirEstoque extends javax.swing.JFrame {
             }
         });
 
-        campoPreco.setText("Preço");
-        campoPreco.setMinimumSize(new java.awt.Dimension(80, 30));
-        campoPreco.setPreferredSize(new java.awt.Dimension(80, 30));
-        campoPreco.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                campoPrecoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                campoPrecoFocusLost(evt);
-            }
-        });
-
         quantidade.setText("Quantidade:");
         quantidade.setMinimumSize(new java.awt.Dimension(80, 30));
         quantidade.setPreferredSize(new java.awt.Dimension(80, 30));
@@ -134,26 +123,40 @@ public class InserirEstoque extends javax.swing.JFrame {
             }
         });
 
+        campoPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
+
+        jLabel2.setText("Preço:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(campoAux, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82)
-                        .addComponent(quantSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(campoPreco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoNome, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createSequentialGroup()
+                                .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(82, 82, 82)
+                                .addComponent(quantSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnSair, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoPreco, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoAux, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnInserir, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {campoAux, campoNome, campoPreco});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel2, quantidade});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -165,33 +168,40 @@ public class InserirEstoque extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quantSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(campoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(campoAux, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
-                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {campoAux, campoNome, campoPreco});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, quantidade});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 88, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                .addGap(0, 23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,40 +231,33 @@ public class InserirEstoque extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_campoNomeFocusLost
 
-    /**
-     * Se o campo contem o placeholder, limpa o campo
-     */
-    private void campoPrecoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoPrecoFocusGained
-        if(campoPreco.getText().equals("Preço")){
-            campoPreco.setText("");
-            
-        }
-    }//GEN-LAST:event_campoPrecoFocusGained
-    
-    /**
-     * Se o campo está vazio, coloca o placeholder
-     */
-    private void campoPrecoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoPrecoFocusLost
-        if(campoPreco.getText().equals("")){
-            campoPreco.setText("Preço");
-            
-            
-        }
-    }//GEN-LAST:event_campoPrecoFocusLost
-
+   
     /**
      * Insere um item no estoque
      * Verifica se os campos estão preenchidos corretamente
      */
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         
-        if(campoNome.getText().equals("Nome") || campoPreco.getText().equals("Preco") || campoPreco.getText().equals("") || campoNome.getText().equals("")){
+        if(campoNome.getText().equals("Nome") || campoNome.getText().equals("")){
             campoAux.setText("Preencha os campos corretamente");
             return;
         }
-        campoPreco.setText(campoPreco.getText().replace(",", ".")); // Substitui a virgula por ponto
+        campoNome.setText(campoNome.getText().substring(0, 1).toUpperCase() + campoNome.getText().substring(1));
+        if(hashEstoque.buscarItem(campoNome.getText())!=null){
+            campoAux.setText("Item já existe no estoque");
+            return;
+        }
+        
+        String precoTemp = campoPreco.getText().replace(",", "l");
+        precoTemp = precoTemp.replace(".", "j");
+        precoTemp = precoTemp.replace("l", ".");
+        precoTemp = precoTemp.replace("j", "");
         String nome = campoNome.getText(); // Pega o nome do item
-        float preco = Float.parseFloat(campoPreco.getText()); // Pega o preço do item
+        float preco = Float.parseFloat(precoTemp); // Pega o preço do item
+        if(preco<=0){
+            campoAux.setText("Preço inválido");
+            return;
+        }
         int quantidadeLocal = (int) quantSpinner.getValue(); // Pega a quantidade do item
 
 
@@ -275,7 +278,7 @@ public class InserirEstoque extends javax.swing.JFrame {
         String nome = campoNome.getText();
         float preco = Float.parseFloat(campoPreco.getText());
         int quantidadeLocal = (int) quantSpinner.getValue();
-        if(!campoAux.getText().equals("")){
+        if(!campoAux.getText().equals("") && campoAux.getText().equals("Nome: " + nome + " Preço: " + preco + " Quantidade: " + quantidadeLocal)){
             this.hashEstoque.inserir(nome, preco, quantidadeLocal);
             this.dispose();
         }
@@ -322,8 +325,9 @@ public class InserirEstoque extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JTextField campoAux;
     private javax.swing.JTextField campoNome;
-    private javax.swing.JTextField campoPreco;
+    private javax.swing.JFormattedTextField campoPreco;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSpinner quantSpinner;
     private javax.swing.JLabel quantidade;

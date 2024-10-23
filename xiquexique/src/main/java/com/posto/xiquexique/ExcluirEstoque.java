@@ -15,14 +15,14 @@ public class ExcluirEstoque extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
 
-    TableModifier tableModifier = new TableModifier();
+    Auxiliar mod = new Auxiliar();
     /**
      * Creates new form ExcluirEstoque
      */
     public ExcluirEstoque(HashEstoque estoque) {
         this.hashEstoque = estoque;
         initComponents();
-        tableModifier.tableAddEstoque(estoque, tabelaEstoque);
+        mod.tableAddEstoque(estoque, tabelaEstoque);
     }
 
 
@@ -181,7 +181,7 @@ public class ExcluirEstoque extends javax.swing.JFrame {
         }
         this.hashEstoque.remover(item);
 
-        this.tableModifier.tableAddEstoque(this.hashEstoque, tabelaEstoque);
+        this.mod.tableAddEstoque(this.hashEstoque, tabelaEstoque);
 
         campoTexto.setText("");
 

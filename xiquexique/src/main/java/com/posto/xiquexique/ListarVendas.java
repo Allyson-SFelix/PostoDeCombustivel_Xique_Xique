@@ -11,16 +11,18 @@ package com.posto.xiquexique;
  */
 public class ListarVendas extends javax.swing.JFrame {
 
-    EstruturaVenda venda;
-    TableModifier tableModifier = new TableModifier();
+    HeapVenda venda;
+    Auxiliar mod = new Auxiliar();
+    HashEstoque hashEstoque;
  
     /**
      * Creates new form ListarVendas
      */
-    public ListarVendas(EstruturaVenda venda) {
+    public ListarVendas(HeapVenda venda,HashEstoque estoque) {
         this.venda = venda;
+        this.hashEstoque = estoque;
         initComponents();
-        tableModifier.tableAddVenda(venda, tabelaEstoque);
+        mod.tableAddVenda(venda, tabelaVenda);
     }
  
     /**
@@ -34,7 +36,10 @@ public class ListarVendas extends javax.swing.JFrame {
 
         btnSair = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaEstoque = new javax.swing.JTable();
+        tabelaVenda = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        RemoverItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(500, 400));
@@ -57,20 +62,19 @@ public class ListarVendas extends javax.swing.JFrame {
         jScrollPane1.setToolTipText("Estoque");
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        tabelaEstoque.setAutoCreateRowSorter(true);
-        tabelaEstoque.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+
             },
             new String [] {
-                "Nome", "Quantidade", "Preço Unit."
+                "Nome", "Quantidade", "Preço Unit.", "Preço Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -81,36 +85,51 @@ public class ListarVendas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabelaEstoque.setDropMode(javax.swing.DropMode.INSERT_ROWS);
-        tabelaEstoque.setName(""); // NOI18N
-        tabelaEstoque.setPreferredSize(new java.awt.Dimension(300, 300));
-        tabelaEstoque.setShowGrid(true);
-        tabelaEstoque.getTableHeader().setReorderingAllowed(false);
-        tabelaEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaVenda.setDropMode(javax.swing.DropMode.INSERT_ROWS);
+        tabelaVenda.setName(""); // NOI18N
+        tabelaVenda.setPreferredSize(new java.awt.Dimension(300, 300));
+        tabelaVenda.setShowGrid(true);
+        tabelaVenda.getTableHeader().setReorderingAllowed(false);
+        tabelaVenda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaEstoqueMouseClicked(evt);
+                tabelaVendaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaEstoque);
+        jScrollPane1.setViewportView(tabelaVenda);
+
+        jMenu1.setText("Remover");
+
+        RemoverItem.setText("Nenhum");
+        if(venda.getHeap().length > 0){
+            RemoverItem.setText(venda.getHeap()[0].getItem());
+        }
+        RemoverItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoverItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(RemoverItem);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(205, 205, 205)
-                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -123,9 +142,21 @@ public class ListarVendas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private void tabelaEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaEstoqueMouseClicked
+    private void tabelaVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaVendaMouseClicked
+        
+    }//GEN-LAST:event_tabelaVendaMouseClicked
 
-    }//GEN-LAST:event_tabelaEstoqueMouseClicked
+    private void RemoverItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoverItemActionPerformed
+        HeapVenda.EstruturaVenda vendaRemovida = venda.getHeap(0);
+        hashEstoque.inserir(vendaRemovida.getItem(), vendaRemovida.getPrecoUnit(), vendaRemovida.getQuantidade());
+        venda.remove();
+        mod.tableAddVenda(venda, tabelaVenda);
+        if(venda.getSize() > 0){
+            RemoverItem.setText(venda.getHeap(0).getItem());
+        }else{
+            RemoverItem.setText("Nenhum");
+        }
+    }//GEN-LAST:event_RemoverItemActionPerformed
  
     
  
@@ -160,14 +191,17 @@ public class ListarVendas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListarVendas(null).setVisible(true);
+                new ListarVendas(null,null).setVisible(true);
             }
         });
     }
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem RemoverItem;
     private javax.swing.JButton btnSair;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaEstoque;
+    private javax.swing.JTable tabelaVenda;
     // End of variables declaration//GEN-END:variables
 }

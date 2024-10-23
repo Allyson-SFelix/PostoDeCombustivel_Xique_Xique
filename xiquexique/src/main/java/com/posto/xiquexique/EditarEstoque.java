@@ -17,14 +17,14 @@ public class EditarEstoque extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
 
-    TableModifier tableModifier = new TableModifier();
+    Auxiliar mod = new Auxiliar();
     /**
      * Creates new form EditarEstoque
      */
     public EditarEstoque(HashEstoque estoque) {
         this.hashEstoque = estoque;
         initComponents();
-        tableModifier.tableAddEstoque(estoque, tabelaEstoque);
+        mod.tableAddEstoque(estoque, tabelaEstoque);
     }
 
 
@@ -323,7 +323,7 @@ public class EditarEstoque extends javax.swing.JFrame {
             warnLabel.setText("Preço inválido");
             return;
         }
-        tableModifier.tableAddEstoque(hashEstoque, tabelaEstoque); // atualiza a tabela
+        mod.tableAddEstoque(hashEstoque, tabelaEstoque); // atualiza a tabela
         jDialog.setVisible(false); // fecha a janela de edição
     }//GEN-LAST:event_btnConcluirActionPerformed
 

@@ -14,11 +14,13 @@ package com.posto.xiquexique;
 public class MenuAtendente extends javax.swing.JFrame {
 
     HashEstoque hashEstoque;
+    EstruturaFuncionarios funcionarios;
 
     /**
      * Creates new form MenuAtendente
      */
-    public MenuAtendente(HashEstoque estoque) {
+    public MenuAtendente(HashEstoque estoque, EstruturaFuncionarios func) {
+        this.funcionarios = func;
         this.hashEstoque = estoque;
         initComponents();
     }
@@ -110,7 +112,7 @@ public class MenuAtendente extends javax.swing.JFrame {
      */
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
-        LoginMenu login = new LoginMenu(hashEstoque);
+        LoginMenu login = new LoginMenu(hashEstoque, funcionarios);
         login.setVisible(true);
     }//GEN-LAST:event_btnSairActionPerformed
 
@@ -119,7 +121,7 @@ public class MenuAtendente extends javax.swing.JFrame {
      * Método para abrir a tela de vendas
      */
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        VendasMenu vendas = new VendasMenu(hashEstoque);
+        VendasMenu vendas = new VendasMenu(hashEstoque,funcionarios);
         vendas.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
@@ -163,7 +165,7 @@ public class MenuAtendente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuAtendente(null).setVisible(true);
+                new MenuAtendente(null,null).setVisible(true);
             }
         });
     }
