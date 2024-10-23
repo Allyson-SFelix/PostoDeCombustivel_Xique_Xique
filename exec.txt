@@ -1,1 +1,0 @@
-jpackage --name XiqueXique --input target/ --main-jar xiquexique-2.0-PRE-RELEASE.jar --main-class com.posto.xiquexique.Xiquexique 

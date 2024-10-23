@@ -28,6 +28,8 @@ Este projeto tem como objetivo auxiliar o gestor na resolução de problemas rel
 ### Pré-requisitos para Executar:
 1. **Java Runtime Environment (JRE)**:
     - Você pode baixar a versão mais recente do JRE no site oficial da Oracle: [Oracle JRE Downloads](https://www.oracle.com/java/technologies/downloads/#java8).
+2. **Maven**:
+    - 
 
 ### Passos para Instalar:
 
